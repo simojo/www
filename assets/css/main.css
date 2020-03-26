@@ -1,20 +1,17 @@
+body {
+  background-color: #fffbf7
+}
 h1 {
   text-align: center;
   font-size: 30px;
 }
 
-p {
+.desc {
+  padding-top: 10px;
+  padding-bottom:10px;
   text-align: center;
-  font-size: 11px;
-  font-color: #292320;
+  font-size: 20px;
+  font-family: arial;
 }
 
-.desc {
-  text-align: center;
-  font-size: 11px;
-  font-color: #292320;
-  background-color: #fffbf7;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
 
