@@ -10,11 +10,13 @@
     <!--# endif -->
   </head>
 <body>
+  <div class="desc">
   <!--# if expr="$status = 502" -->
     <h1>The website is getting updated.</h1>
     <p>This is only for a few seconds, you will be redirected.</p>
   <!--# else -->
-    <h1><!--# echo var="status" default="" --> <!--# echo var="status_text" default="Something goes wrong" --></h1>
+    <h1><!--# echo var="status" default="" --> <!--# echo var="status_text" default="Something went wrong" --></h1>
   <!--# endif -->
+  </div>
 </body>
 </html>
