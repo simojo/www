@@ -1,17 +1,37 @@
 body {
-  background-color: #fffbf7
+  background-color: black;
 }
-h1 {
+h1, h2, h3, p {
+  font-family: arial;
+  color: white;
+}
+header a {
+  display:inline-block; width:120px;
+}
+.container {
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.socialicon {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#page-title {
+  font-color: white;
   text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
   font-size: 30px;
 }
-
 .desc {
   padding-top: 10px;
   padding-bottom:10px;
   text-align: center;
   font-size: 20px;
   font-family: arial;
+  color: white;
 }
-
-
