@@ -1,29 +1,55 @@
 body {
-  background-color: black;
+  background-color: #0d0d0d;
 }
 h1, h2, h3, p {
-  font-family: arial;
+  font-family: Consolas;
+  color: #404040;
+}
+p {
+  font-size: 18px;
   color: white;
 }
 header a {
   display:inline-block; width:120px;
 }
-.container {
+.container1 {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.container2 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.container3 {
   padding-left: 60px;
   padding-right: 60px;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
-.desc {
-  padding-top: 10px;
-  padding-bottom:10px;
-  text-align: center;
-  font-size: 20px;
-  font-family: arial;
+.round-box {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  -moz-border-radius: 15px;
+  background-color: #262626;
+}
+.link {
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
   color: white;
 }
+.link:hover {
+  color: #404040;
+}
+.time-stamp {
+  color: #404040;
+}
 #page-title {
-  font-color: white;
   text-align: center;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -34,7 +60,6 @@ header a {
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
-  transition: transform 0.1s;
 }
 #socialnav {
   float: right;
@@ -46,5 +71,5 @@ header a {
   padding: 10px;
 }
 .socialicon:hover {
-  transform: scale(1.1);
+  opacity: 0.8
 }
