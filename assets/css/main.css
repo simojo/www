@@ -1,32 +1,36 @@
+/* https://www.eggradients.com/shades-of-white */
+:root {
+  --font-color: #F5F5F5;
+  --font-accent-color: #404040;
+  --bg-color: #0d0d0d;
+  --bg-accent-color: #262626;
+}
+[data-theme="light"] {
+  --font-color: #330500;
+  --font-accent-color: #ffbab3;
+  --bg-color: #f0eee4;
+  --bg-accent-color: #ffe4e1;
+}
 body {
-  background-color: #0d0d0d;
+  background-color: var(--bg-color);
 }
 h1, h2, h3, p {
   font-family: Hack;
-  color: #404040;
+  color: var(--font-accent-color);
 }
 p {
   font-size: 18px;
-  color: white;
-}
-header a {
-  display:inline-block; width:120px;
+  color: var(--font-color);
 }
 .container1 {
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-left: 30vw;
+  padding-right: 30vw;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 .container2 {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-.container3 {
-  padding-left: 60px;
-  padding-right: 60px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 .round-box {
   padding-left: 20px;
@@ -34,20 +38,25 @@ header a {
   padding-top: 20px;
   padding-bottom: 10px;
   border-radius: 20px;
-  -moz-border-radius: 15px;
-  background-color: #262626;
+  -moz-border-radius: 5vh;
+  background-color: var(--bg-accent-color);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.round-box > h1 {
+  color: var(--font-color);
 }
 .link {
   font-size: 30px;
   font-weight: bold;
   text-decoration: none;
-  color: white;
+  color: var(--font-color);
 }
 .link:hover {
-  color: #404040;
+  color: var(--font-accent-color);
 }
 .time-stamp {
-  color: #404040;
+  color: var(--font-accent-color);
 }
 #page-title {
   text-align: center;
@@ -72,4 +81,49 @@ header a {
 }
 .socialicon:hover {
   opacity: 0.8
+}
+
+/* Dark/Light Mode */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+}
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display:none;
+}
+.slider {
+  background-color: var(--bg-accent-color);
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .2s;
+}
+.slider:before {
+  background-color: var(--font-color);
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .2s;
+  width: 26px;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
 }

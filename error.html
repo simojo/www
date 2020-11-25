@@ -3,20 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title>Simon Jones</title>
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--# if expr="$status = 502" -->
       <meta http-equiv="refresh" content="2">
     <!--# endif -->
   </head>
 <body>
-  <div class="desc">
-  <!--# if expr="$status = 502" -->
-    <h1 align="center">The website is getting updated.</h1>
-    <p align="center">This is only for a few seconds, you will be redirected.</p>
-  <!--# else -->
-    <h1 align="center"><!--# echo var="status" default="" --> <!--# echo var="status_text" default="Something went wrong" --></h1>
-  <!--# endif -->
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round"></div>
+    </label>
   </div>
+  <div class="container1">
+    <div class="round-box">
+      <!--# if expr="$status = 502" -->
+      <h1 align="center">The website is getting updated.</h1>
+      <p align="center">This is only for a few seconds, you will be redirected.</p>
+      <!--# else -->
+      <h1 align="center"><!--# echo var="status" default="" --> <!--# echo var="status_text" default="Something went wrong" --></h1>
+      <!--# endif -->
+    </div>
+  </div>
+  <script src="assets/js/darkmode.js"></script>
 </body>
 </html>
