@@ -7,9 +7,9 @@
 }
 [data-theme="light"] {
   --font-color: #330500;
-  --font-accent-color: #ffbab3;
+  --font-accent-color: #ff8c80;
   --bg-color: #f0eee4;
-  --bg-accent-color: #ffe4e1;
+  --bg-accent-color: #ffbab3;
 }
 body {
   background-color: var(--bg-color);
@@ -83,6 +83,7 @@ p {
   opacity: 0.8
 }
 
+/* https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8 */
 /* Dark/Light Mode */
 .theme-switch-wrapper {
   display: flex;
