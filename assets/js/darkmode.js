@@ -1,6 +1,6 @@
 const toggleSwitch = document.querySelector(".theme-switch input[type='checkbox']");
-const lightFaviconPath = "images/icon-light/";
-const darkFaviconPath = "images/icon-dark/";
+const lightFaviconPath = "/images/icon-light/";
+const darkFaviconPath = "/images/icon-dark/";
 
 function attributeExists(attribute) {
   if (typeof(attribute) === "undefined" || attribute == null) {
