@@ -1,6 +1,7 @@
 const toggleSwitch = document.querySelector(".theme-switch input[type='checkbox']");
-const lightFaviconPath = "/images/icon-light/";
-const darkFaviconPath = "/images/icon-dark/";
+const lightFaviconPath = "images/icon-light/";
+const darkFaviconPath = "images/icon-dark/";
+const themes = ["dark", "light"]
 
 function attributeExists(attribute) {
   if (typeof(attribute) === "undefined" || attribute == null) {
@@ -11,11 +12,18 @@ function attributeExists(attribute) {
 }
 
 function switchTheme(e) {
+  var theme = ""
   if (e.target.checked) {
-    document.documentElement.setAttribute("data-theme", "light");
+    theme = "light"
   } else {
-    document.documentElement.setAttribute("data-theme", "dark");
+    theme = "dark"
   }
+  setTheme(theme)
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  switchFavicon(theme)
 }
 
 function switchFavicon(theme) {
@@ -43,7 +51,7 @@ function setFaviconLinks(baseUrl) {
       link.rel = favicon.rel;
       document.getElementsByTagName("head")[0].appendChild(link);
     }
-    link.href = `${baseUrl}${favicon.href}`
+    link.setAttribute("href", `${baseUrl}${favicon.href}`);
   });
 }
 
