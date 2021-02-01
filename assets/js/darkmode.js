@@ -2,6 +2,7 @@ const toggleSwitch = document.querySelector(".theme-switch input[type='checkbox'
 const lightFaviconPath = "images/icon-light/";
 const darkFaviconPath = "images/icon-dark/";
 const themes = ["dark", "light"]
+// TODO: choose random color scheme upon switching
 
 function attributeExists(attribute) {
   if (typeof(attribute) === "undefined" || attribute == null) {
@@ -16,7 +17,7 @@ function switchTheme(e) {
   if (e.target.checked) {
     theme = "light"
   } else {
-    theme = "dark"
+    theme = "aqua"
   }
   setTheme(theme)
 }

@@ -5,11 +5,17 @@
   --bg-color: #0d0d0d;
   --bg-accent-color: #262626;
 }
-[data-theme="light"] {
+[data-theme="cherry-blossom"] {
   --font-color: #330500;
   --font-accent-color: #ff8c80;
   --bg-color: #f0eee4;
   --bg-accent-color: #ffbab3;
+}
+[data-theme="aqua"] {
+  --font-color: #06262d;
+  --font-accent-color: #387a87;
+  --bg-color: #7bc0ce;
+  --bg-accent-color: #1d6c7c;
 }
 body {
   background-color: var(--bg-color);
@@ -31,6 +37,21 @@ p {
 .container2 {
   padding-top: 5vh;
   padding-bottom: 5vh;
+}
+.fill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+.fill img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    -moz-border-radius: 5vh;
 }
 .round-box {
   padding-left: 20px;
