@@ -1,5 +1,5 @@
 /* https://www.eggradients.com/shades-of-white */
-:root {
+[data-theme="dark"] {
   --font-color: #F5F5F5;
   --font-accent-color: #404040;
   --bg-color: #0d0d0d;
@@ -10,6 +10,12 @@
   --font-accent-color: #ff8c80;
   --bg-color: #f0eee4;
   --bg-accent-color: #ffbab3;
+}
+[data-theme="cafe"] {
+  --font-color: #2b1b12;
+  --font-accent-color: #493226;
+  --bg-color: #c99274;
+  --bg-accent-color: #8e6152;
 }
 [data-theme="aqua"] {
   --font-color: #06262d;

@@ -1,8 +1,7 @@
 const toggleSwitch = document.querySelector(".theme-switch input[type='checkbox']");
-const lightFaviconPath = "images/icon-light/";
 const darkFaviconPath = "images/icon-dark/";
-const themes = ["dark", "light"]
-// TODO: choose random color scheme upon switching
+const themes = ["dark", "cherry-blossom", "aqua", "cafe"]
+var currentTheme = "null"
 
 function attributeExists(attribute) {
   if (typeof(attribute) === "undefined" || attribute == null) {
@@ -13,29 +12,16 @@ function attributeExists(attribute) {
 }
 
 function switchTheme(e) {
-  var theme = ""
-  if (e.target.checked) {
-    theme = "light"
-  } else {
-    theme = "aqua"
-  }
+  currentThemeIndex = themes.indexOf(currentTheme)
+  var nextThemeIndex = (currentThemeIndex + 1 === themes.length ? 0 : currentThemeIndex + 1)
+  var theme = themes[nextThemeIndex]
   setTheme(theme)
 }
 
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  switchFavicon(theme)
-}
-
-function switchFavicon(theme) {
-  switch (theme) {
-    case "light":
-      setFaviconLinks(lightFaviconPath);
-      break;
-    case "dark":
-      setFaviconLinks(darkFaviconPath);
-      break;
-  }
+  console.log(`data-theme changed from ${currentTheme} to ${theme}.`)
+  currentTheme = theme
 }
 
 function setFaviconLinks(baseUrl) {
@@ -58,4 +44,5 @@ function setFaviconLinks(baseUrl) {
 
 // init
 setFaviconLinks(darkFaviconPath);
+setTheme("dark")
 toggleSwitch.addEventListener("change", switchTheme, false);
