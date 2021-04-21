@@ -35,8 +35,11 @@ class Data:
 
     @staticmethod
     def fetchPostsLandingJson():
-        # FIXME do not capture variable
-        return json.dumps(list(map(lambda x: x.pop("body"), Data.fetchPosts())))
+        result = []
+        for i in Data.fetchPosts():
+            i.pop("body")
+            result.append(i)
+        return json.dumps(result)
 
 def OK(str=""):
     return str,200
