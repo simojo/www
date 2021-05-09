@@ -1,54 +1,22 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <link rel="apple-touch-icon" sizes="180x180" href="">
-    <link rel="icon" type="image/png" sizes="32x32" href="">
-    <link rel="icon" type="image/png" sizes="16x16" href="">
+<head>
+  <meta charset="UTF-8">
     <link rel="manifest" href="">
     <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css'>
-    <title>Simon Jones</title>
+    <title>Poetry</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="assets/css/main.css">
-  </head>
-  <body>
-    <div id="topnav">
-      <nav id="pagenav">
-        <div class="theme-switch-wrapper">
-          <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider round"></div>
-          </label>
-        </div>
-      </nav>
-      <nav id="socialnav">
-        <a href="https://github.com/simojo" target="new" title="GitHub"><img class="socialicon" src="images/GitHub-Mark-Light-120px-plux.png" height="30" width="30"></a>
-        <a href="https://www.linkedin.com/in/simojo" target="new" title="LinkedIn"><img class="socialicon" src="images/LinkedIn-Logo-512x512.png" height="30" width="30"></a>
-      </nav>
-    </div>
-    <div class="container1">
-      <header id="page-title">
-        <h1>Simon Jones</h1>
-      </header>
-      <div class="container2">
-        <h1>Projects</h1>
-        <div class="round-box">
-          <a href="https://github.com/simojo/ImpactOfDragOnFreefall" class="link" target="new">Impact of Drag on Freefall</a>
-          <p>Physics modeling that utilizes nim/rust to preform computations</p>
-          <p class="time-stamp">4 12 2020</p>
-        </div>
-        <div class="round-box">
-          <a href="https://github.com/simojo/comtube" class="link" target="new">comtube</a>
-          <p>Python module that Converts YouTube videos into comic books</p>
-          <p class="time-stamp">24 11 2020</p>
-        </div>
-      </div>
-      <div class="continer2">
-        <h1>Stats</h1>
-        <div class="fill">
-          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=simojo&theme=highcontrast&hide=html&layout=compact&langs_count=10&hide_title=true&hide_border=true" />
-        </div>
-      </div>
-    </div>
-    <script src="assets/js/darkmode.js"></script>
-  </body>
+</head>
+
+<body>
+  <div id="elm-node"></div>
+  <script src="elm.js"></script>
+  <script>
+    var app = Elm.Main.init({
+      node: document.getElementById("elm-node")
+    });
+  </script>
+<script src="assets/js/darkmode.js"></script>
+</body>
 </html>

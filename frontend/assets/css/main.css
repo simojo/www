@@ -1,157 +1,44 @@
-/* https://www.eggradients.com/shades-of-white */
-[data-theme="dark"] {
+:root {
   --font-color: #F5F5F5;
   --font-accent-color: #404040;
   --bg-color: #0d0d0d;
   --bg-accent-color: #262626;
-}
-[data-theme="cherry-blossom"] {
-  --font-color: #330500;
-  --font-accent-color: #ff8c80;
-  --bg-color: #f0eee4;
-  --bg-accent-color: #ffbab3;
-}
-[data-theme="cafe"] {
-  --font-color: #2b1b12;
-  --font-accent-color: #493226;
-  --bg-color: #c99274;
-  --bg-accent-color: #8e6152;
-}
-[data-theme="aqua"] {
-  --font-color: #06262d;
-  --font-accent-color: #387a87;
-  --bg-color: #7bc0ce;
-  --bg-accent-color: #1d6c7c;
+  --bg-accent-color-rgb: 38, 38, 38;
 }
 body {
   background-color: var(--bg-color);
+  transition: var(--transition);
+  font-size: 25px;
+  font-family: Hack;
 }
 h1, h2, h3, p, a {
-  font-family: Hack;
   color: var(--font-accent-color);
+  transition: var(--transition);
+  white-space: pre-wrap;
 }
 p {
-  font-size: 18px;
+  font-size: 1em;
   color: var(--font-color);
 }
-.container1 {
-  padding-left: 30vw;
-  padding-right: 30vw;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
+.console {
+  margin: 1em;
 }
-.container2 {
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-}
-.fill {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden
-}
-.fill img {
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 20px;
-    -moz-border-radius: 5vh;
-}
-.round-box {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  border-radius: 20px;
-  -moz-border-radius: 5vh;
-  background-color: var(--bg-accent-color);
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.round-box > h1 {
-  color: var(--font-color);
-}
-.link {
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: var(--font-color);
-}
-.link:hover {
+.prompt {
   color: var(--font-accent-color);
 }
-.time-stamp {
-  color: var(--font-accent-color);
+.prompt-line > input {
+  outline: none;
+  border: 0;
+  background-color: var(--bg-color);
+  caret-color: var(--font-color):
 }
-#page-title {
-  text-align: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  font-size: 30px;
+.console > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: var(--font-color);
 }
-.socialicon {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-#socialnav {
-  float: right;
-}
-#pagenav {
-  float: left;
-}
-#topnav {
-  padding: 10px;
-}
-.socialicon:hover {
-  opacity: 0.8
-}
-
-/* https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8 */
-/* Dark/Light Mode */
-.theme-switch-wrapper {
-  display: flex;
-  align-items: center;
-}
-.theme-switch {
-  display: inline-block;
-  height: 34px;
-  position: relative;
-  width: 60px;
-}
-
-.theme-switch input {
-  display:none;
-}
-.slider {
-  background-color: var(--bg-accent-color);
-  bottom: 0;
-  cursor: pointer;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: .2s;
-}
-.slider:before {
-  background-color: var(--font-color);
-  bottom: 4px;
-  content: "";
-  height: 26px;
-  left: 4px;
-  position: absolute;
-  transition: .2s;
-  width: 26px;
-}
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-.slider.round {
-  border-radius: 34px;
-}
-.slider.round:before {
-  border-radius: 50%;
+li {
+  margin: .2em;
+  color: var(--font-color);
 }

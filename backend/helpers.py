@@ -1,45 +1,26 @@
-import json
+# external
+import flask
 import os
-import re
+import sys
+# internal
+from globals import Globals
 
-POSTS = "./data/posts/"
-
-class Data:
+class Helpers:
+    ## Responses ##
     @staticmethod
-    def fetchPosts():
-        result = []
-        for path in os.listdir(POSTS):
-            txt = open(POSTS + path).read()
-            blob = lambda x: f"(?<=^{x} ).*"
-            title = re.findall(blob("#"), txt, re.MULTILINE)[0]
-            subtitle = re.findall(blob("##"), txt, re.MULTILINE)[0]
-            date = re.findall(blob("###"), txt, re.MULTILINE)[0]
-            body = re.sub(r"^(#.*)\n", "", txt, flags=re.MULTILINE).lstrip().rstrip()
-            route = re.findall("(?=\.md)", path)[0]
-            result.append({
-                "route": route,
-                "title": title,
-                "subtitle": subtitle,
-                "date": date,
-                "body": body
-            })
-        return result
+    def OK(str=""):
+        response = flask.Response([str.encode("utf-8")])
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Content-Type"] = "application/json"
+        response.status_code = 200
+        return response
 
     @staticmethod
-    def fetchPostsJson():
-        return json.dumps(Data.fetchPosts())
-
-    @staticmethod
-    def fetchPostJson(postroute):
-        return json.dumps(list(filter(lambda x: x["route"] == postroute, Data.fetchPosts()))[0])
-
-    @staticmethod
-    def fetchPostsLandingJson():
-        result = []
-        for i in Data.fetchPosts():
-            i.pop("body")
-            result.append(i)
-        return json.dumps(result)
-
-def OK(str=""):
-    return str,200
+    def ERROR_INTERNAL(e):
+        if Globals.isDebug:
+            excType, excObj, excTb = sys.exc_info()
+            print(f"{excTb.tb_lineno}: {e}")
+        response = flask.Response(["An internal error occured.".encode("utf-8")])
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.status_code = 500
+        return response
