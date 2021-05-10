@@ -121,12 +121,27 @@ lineFromCommand command =
     (case String.split " " command of
       [] ->
         Ok ""
-      "help" :: [] ->
-        Ok " Welcome to the terminal!\nType a command to get started."
-      "start" :: [] ->
-        Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo"
+      "?" :: [] ->
+        Ok "Welcome to the terminal!\nType a command to get started."
+
       "exit" :: [] ->
-        Ok "You can't really do that here."
+        Err "Sorry, you can't really do that here."
+
+      "joe" :: [] ->
+        Ok "Hi I'm joe. I can be annoying, wholesome, or awesome."
+      "joe" :: [ "annoying" ] ->
+        Ok "Bruh!! This song by the Marias is so cool! It's a masterpiece!!! Omg this song is literally a masterpiece!!"
+      "joe" :: [ "wholesome" ] ->
+        Ok "I'm so happy I finished school."
+      "joe" :: [ "awesome" ] ->
+        Ok "Strinky strink frick!!!! frink you!!! I'ms o sfrickign done w u"
+
+      "echo" :: [ str ] ->
+        Ok str
+
+      "start" :: [] ->
+        Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help."
+
       char :: _ ->
         Err <| "Error: Command \"" ++ char ++ "\" not found."
     )

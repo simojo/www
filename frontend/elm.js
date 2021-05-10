@@ -5179,24 +5179,51 @@ var $author$project$Main$lineFromCommand = function (command) {
 		command,
 		function () {
 			var _v0 = A2($elm$core$String$split, ' ', command);
-			_v0$4:
+			_v0$9:
 			while (true) {
 				if (!_v0.b) {
 					return $elm$core$Result$Ok('');
 				} else {
-					if (!_v0.b.b) {
-						switch (_v0.a) {
-							case 'help':
-								return $elm$core$Result$Ok(' Welcome to the terminal!\nType a command to get started.');
-							case 'start':
-								return $elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo');
-							case 'exit':
-								return $elm$core$Result$Ok('You can\'t really do that here.');
-							default:
-								break _v0$4;
+					if (_v0.b.b) {
+						if (!_v0.b.b.b) {
+							switch (_v0.a) {
+								case 'joe':
+									switch (_v0.b.a) {
+										case 'annoying':
+											var _v1 = _v0.b;
+											return $elm$core$Result$Ok('Bruh!! This song by the Marias is so cool! It\'s a masterpiece!!! Omg this song is literally a masterpiece!!');
+										case 'wholesome':
+											var _v2 = _v0.b;
+											return $elm$core$Result$Ok('I\'m so happy I finished school.');
+										case 'awesome':
+											var _v3 = _v0.b;
+											return $elm$core$Result$Ok('Strinky strink frick!!!! frink you!!! I\'ms o sfrickign done w u');
+										default:
+											break _v0$9;
+									}
+								case 'echo':
+									var _v4 = _v0.b;
+									var str = _v4.a;
+									return $elm$core$Result$Ok(str);
+								default:
+									break _v0$9;
+							}
+						} else {
+							break _v0$9;
 						}
 					} else {
-						break _v0$4;
+						switch (_v0.a) {
+							case '?':
+								return $elm$core$Result$Ok('Welcome to the terminal!\nType a command to get started.');
+							case 'exit':
+								return $elm$core$Result$Err('Sorry, you can\'t really do that here.');
+							case 'joe':
+								return $elm$core$Result$Ok('Hi I\'m joe. I can be annoying, wholesome, or awesome.');
+							case 'start':
+								return $elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help.');
+							default:
+								break _v0$9;
+						}
 					}
 				}
 			}
