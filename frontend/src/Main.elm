@@ -1,9 +1,7 @@
 module Main exposing (..)
 import Browser
-import Browser.Navigation as Nav
-import Url
-import Url.Parser as UrlP exposing (Parser, (</>))
 import Html exposing (
+    Attribute,
     Html,
     a,
     button,
@@ -24,8 +22,10 @@ import Html exposing (
     ul
   )
 import Html.Events exposing (
-    onClick,
+    keyCode,
+    on,
     onCheck,
+    onClick,
     onInput
   )
 import Http
@@ -34,57 +34,44 @@ import Json.Decode as Decode
 
 main : Program () Model Msg
 main =
-  Browser.application {
+  Browser.document {
     init = init,
     view = view,
     update = update,
-    subscriptions = subscriptions,
-    onUrlChange = UrlChanged,
-    onUrlRequest = LinkClicked
+    subscriptions = subscriptions
   }
 
-init : () -> Url.Url -> Nav.Key -> (Model, Cmd Msg)
-init flags url key =
-  (Model key url ["Welcome!"], Cmd.none)
+init : () -> (Model, Cmd Msg)
+init flags =
+  (Model [ Line "start" (Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo") ] "", Cmd.none)
 
 type alias Line = {
-    text : String
-  }
-
-type alias Post = {
-    id : String,
-    title : String,
-    subtitle : String,
-    body : String,
-    date : String
+    input : String,
+    output : Result String String
   }
 
 type alias Model = {
-    key : Nav.Key,
-    url : Url.Url,
-    lines : List String
+    lines : List Line,
+    input : String
   }
 
 type Msg
-  = Command String
-  | LinkClicked Browser.UrlRequest
-  | UrlChanged Url.Url
+  = Input String
+  | KeyDown Int
 
 -- UPDATE --
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    Command command ->
-      ({ model | lines = (lineFromCommand command) ++ model.lines }, Cmd.none)
-    LinkClicked urlRequest ->
-      case urlRequest of
-        Browser.Internal url ->
-          (model, Nav.pushUrl model.key (Url.toString url))
-        Browser.External href ->
-          (model, Nav.load href)
-    UrlChanged url ->
-      (model, Cmd.none)
+    Input str ->
+      ({ model | input = str}, Cmd.none)
+    KeyDown key ->
+      case key of
+        13 ->
+          ({ model | lines = model.lines ++ ((lineFromCommand model.input) :: []) }, Cmd.none)
+        _ ->
+          (model, Cmd.none)
 
 -- SUBSCRIPTIONS --
 
@@ -100,7 +87,7 @@ view model = {
     body = [
       div [ class "console" ] [
         ul [] (
-          List.reverse (promptLine :: (displayLines model.lines))
+          (displayLines model.lines) ++ (promptLine :: [])
         )
       ]
     ]
@@ -108,27 +95,41 @@ view model = {
 
 -- HELPERS --
 
-displayLines : List String -> List (Html Msg)
+displayLines : List Line -> List (Html Msg)
 displayLines lines =
   lines
-  |> List.map (\line ->
-    li [] [
-      prompt,
-      text line
+  |> List.map (\line -> [
+      li [] [
+        prompt,
+        text line.input
+      ],
+      li [] [
+        case line.output of
+          Ok str ->
+            text str
+          Err str ->
+            span [ class "error" ] [ text str ]
+      ]
     ]
   )
+  |> List.concat
 
-lineFromCommand : String -> List String
-lineFromCommand command = [
+lineFromCommand : String -> Line
+lineFromCommand command =
+  Line
+    command
     (case String.split " " command of
       [] ->
-        ""
-      "l" :: [] ->
-        "Nothing to see here."
-      c :: _ ->
-        "You pressed " ++ c
-    ), command
-  ]
+        Ok ""
+      "help" :: [] ->
+        Ok " Welcome to the terminal!\nType a command to get started."
+      "start" :: [] ->
+        Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo"
+      "exit" :: [] ->
+        Ok "You can't really do that here."
+      char :: _ ->
+        Err <| "Error: Command \"" ++ char ++ "\" not found."
+    )
 
 
 prompt : Html Msg
@@ -138,8 +139,12 @@ prompt =
 promptLine : Html Msg
 promptLine =
   li [] [
-    div [ class "prompt-line" ] [
+    div [ id "prompt-line" ] [
       prompt,
-      input [ onInput Command, placeholder ""] []
+      input [ onKeyDown KeyDown, onInput Input, placeholder ""] []
     ]
   ]
+
+onKeyDown : (Int -> msg) -> Attribute msg
+onKeyDown tagger =
+  on "keydown" (Decode.map tagger keyCode)

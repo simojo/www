@@ -4,6 +4,7 @@
   --bg-color: #0d0d0d;
   --bg-accent-color: #262626;
   --bg-accent-color-rgb: 38, 38, 38;
+  --error: #F7768E;
 }
 body {
   background-color: var(--bg-color);
@@ -11,26 +12,21 @@ body {
   font-size: 25px;
   font-family: Hack;
 }
-h1, h2, h3, p, a {
-  color: var(--font-accent-color);
-  transition: var(--transition);
-  white-space: pre-wrap;
-}
-p {
-  font-size: 1em;
-  color: var(--font-color);
-}
 .console {
   margin: 1em;
 }
 .prompt {
   color: var(--font-accent-color);
 }
-.prompt-line > input {
+#prompt-line > input {
   outline: none;
   border: 0;
   background-color: var(--bg-color);
-  caret-color: var(--font-color):
+  color: var(--font-color);
+  caret-color: var(--font-color);
+  font-size: 25px;
+  font-family: Hack;
+  width: 80vw;
 }
 .console > ul {
   list-style-type: none;
@@ -41,4 +37,8 @@ p {
 li {
   margin: .2em;
   color: var(--font-color);
+  white-space: pre-wrap;
+}
+.error {
+  color: var(--error);
 }

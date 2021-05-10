@@ -4355,12 +4355,6 @@ function _Browser_load(url)
 		}
 	}));
 }
-var $author$project$Main$LinkClicked = function (a) {
-	return {$: 'LinkClicked', a: a};
-};
-var $author$project$Main$UrlChanged = function (a) {
-	return {$: 'UrlChanged', a: a};
-};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5149,127 +5143,94 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
-var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Main$Model = F3(
-	function (key, url, lines) {
-		return {key: key, lines: lines, url: url};
+var $elm$browser$Browser$document = _Browser_document;
+var $author$project$Main$Line = F2(
+	function (input, output) {
+		return {input: input, output: output};
+	});
+var $author$project$Main$Model = F2(
+	function (lines, input) {
+		return {input: input, lines: lines};
 	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Main$init = F3(
-	function (flags, url, key) {
-		return _Utils_Tuple2(
-			A3(
-				$author$project$Main$Model,
-				key,
-				url,
-				_List_fromArray(
-					['Welcome!'])),
-			$elm$core$Platform$Cmd$none);
-	});
+var $author$project$Main$init = function (flags) {
+	return _Utils_Tuple2(
+		A2(
+			$author$project$Main$Model,
+			_List_fromArray(
+				[
+					A2(
+					$author$project$Main$Line,
+					'start',
+					$elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo'))
+				]),
+			''),
+		$elm$core$Platform$Cmd$none);
+};
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$none;
 };
 var $author$project$Main$lineFromCommand = function (command) {
-	return _List_fromArray(
-		[
-			function () {
+	return A2(
+		$author$project$Main$Line,
+		command,
+		function () {
 			var _v0 = A2($elm$core$String$split, ' ', command);
-			if (!_v0.b) {
-				return '';
-			} else {
-				if ((_v0.a === 'l') && (!_v0.b.b)) {
-					return 'Nothing to see here.';
+			_v0$4:
+			while (true) {
+				if (!_v0.b) {
+					return $elm$core$Result$Ok('');
 				} else {
-					var c = _v0.a;
-					return 'You pressed ' + c;
+					if (!_v0.b.b) {
+						switch (_v0.a) {
+							case 'help':
+								return $elm$core$Result$Ok('\n        Welcome to the terminal!\n        Type a command to get started.\n        ');
+							case 'start':
+								return $elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo');
+							case 'exit':
+								return $elm$core$Result$Ok('You can\'t really do that here.');
+							default:
+								break _v0$4;
+						}
+					} else {
+						break _v0$4;
+					}
 				}
 			}
-		}(),
-			command
-		]);
-};
-var $elm$browser$Browser$Navigation$load = _Browser_load;
-var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
-var $elm$url$Url$addPort = F2(
-	function (maybePort, starter) {
-		if (maybePort.$ === 'Nothing') {
-			return starter;
-		} else {
-			var port_ = maybePort.a;
-			return starter + (':' + $elm$core$String$fromInt(port_));
-		}
-	});
-var $elm$url$Url$addPrefixed = F3(
-	function (prefix, maybeSegment, starter) {
-		if (maybeSegment.$ === 'Nothing') {
-			return starter;
-		} else {
-			var segment = maybeSegment.a;
-			return _Utils_ap(
-				starter,
-				_Utils_ap(prefix, segment));
-		}
-	});
-var $elm$url$Url$toString = function (url) {
-	var http = function () {
-		var _v0 = url.protocol;
-		if (_v0.$ === 'Http') {
-			return 'http://';
-		} else {
-			return 'https://';
-		}
-	}();
-	return A3(
-		$elm$url$Url$addPrefixed,
-		'#',
-		url.fragment,
-		A3(
-			$elm$url$Url$addPrefixed,
-			'?',
-			url.query,
-			_Utils_ap(
-				A2(
-					$elm$url$Url$addPort,
-					url.port_,
-					_Utils_ap(http, url.host)),
-				url.path)));
+			var _char = _v0.a;
+			return $elm$core$Result$Err('Error: Command \"' + (_char + '\" not found.'));
+		}());
 };
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		switch (msg.$) {
-			case 'Command':
-				var command = msg.a;
+		if (msg.$ === 'Input') {
+			var str = msg.a;
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{input: str}),
+				$elm$core$Platform$Cmd$none);
+		} else {
+			var key = msg.a;
+			if (key === 13) {
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
 							lines: _Utils_ap(
-								$author$project$Main$lineFromCommand(command),
-								model.lines)
+								model.lines,
+								A2(
+									$elm$core$List$cons,
+									$author$project$Main$lineFromCommand(model.input),
+									_List_Nil))
 						}),
 					$elm$core$Platform$Cmd$none);
-			case 'LinkClicked':
-				var urlRequest = msg.a;
-				if (urlRequest.$ === 'Internal') {
-					var url = urlRequest.a;
-					return _Utils_Tuple2(
-						model,
-						A2(
-							$elm$browser$Browser$Navigation$pushUrl,
-							model.key,
-							$elm$url$Url$toString(url)));
-				} else {
-					var href = urlRequest.a;
-					return _Utils_Tuple2(
-						model,
-						$elm$browser$Browser$Navigation$load(href));
-				}
-			default:
-				var url = msg.a;
+			} else {
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			}
 		}
 	});
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -5281,6 +5242,17 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			$elm$json$Json$Encode$string(string));
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
@@ -5296,24 +5268,57 @@ var $author$project$Main$prompt = A2(
 			$elm$html$Html$text('you@here - ')
 		]));
 var $author$project$Main$displayLines = function (lines) {
-	return A2(
-		$elm$core$List$map,
-		function (line) {
-			return A2(
-				$elm$html$Html$li,
-				_List_Nil,
-				_List_fromArray(
+	return $elm$core$List$concat(
+		A2(
+			$elm$core$List$map,
+			function (line) {
+				return _List_fromArray(
 					[
-						$author$project$Main$prompt,
-						$elm$html$Html$text(line)
-					]));
-		},
-		lines);
+						A2(
+						$elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$author$project$Main$prompt,
+								$elm$html$Html$text(line.input)
+							])),
+						A2(
+						$elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								function () {
+								var _v0 = line.output;
+								if (_v0.$ === 'Ok') {
+									var str = _v0.a;
+									return $elm$html$Html$text(str);
+								} else {
+									var str = _v0.a;
+									return A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('error')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(str)
+											]));
+								}
+							}()
+							]))
+					]);
+			},
+			lines));
 };
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Main$Command = function (a) {
-	return {$: 'Command', a: a};
+var $author$project$Main$Input = function (a) {
+	return {$: 'Input', a: a};
 };
+var $author$project$Main$KeyDown = function (a) {
+	return {$: 'KeyDown', a: a};
+};
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
@@ -5349,6 +5354,24 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $elm$html$Html$Events$keyCode = A2($elm$json$Json$Decode$field, 'keyCode', $elm$json$Json$Decode$int);
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $author$project$Main$onKeyDown = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'keydown',
+		A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$keyCode));
+};
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
 var $author$project$Main$promptLine = A2(
 	$elm$html$Html$li,
@@ -5359,7 +5382,7 @@ var $author$project$Main$promptLine = A2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('prompt-line')
+					$elm$html$Html$Attributes$id('prompt-line')
 				]),
 			_List_fromArray(
 				[
@@ -5368,7 +5391,8 @@ var $author$project$Main$promptLine = A2(
 					$elm$html$Html$input,
 					_List_fromArray(
 						[
-							$elm$html$Html$Events$onInput($author$project$Main$Command),
+							$author$project$Main$onKeyDown($author$project$Main$KeyDown),
+							$elm$html$Html$Events$onInput($author$project$Main$Input),
 							$elm$html$Html$Attributes$placeholder('')
 						]),
 					_List_Nil)
@@ -5390,17 +5414,15 @@ var $author$project$Main$view = function (model) {
 						A2(
 						$elm$html$Html$ul,
 						_List_Nil,
-						$elm$core$List$reverse(
-							A2(
-								$elm$core$List$cons,
-								$author$project$Main$promptLine,
-								$author$project$Main$displayLines(model.lines))))
+						_Utils_ap(
+							$author$project$Main$displayLines(model.lines),
+							A2($elm$core$List$cons, $author$project$Main$promptLine, _List_Nil)))
 					]))
 			]),
 		title: 'Terminal'
 	};
 };
-var $author$project$Main$main = $elm$browser$Browser$application(
-	{init: $author$project$Main$init, onUrlChange: $author$project$Main$UrlChanged, onUrlRequest: $author$project$Main$LinkClicked, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
+var $author$project$Main$main = $elm$browser$Browser$document(
+	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
