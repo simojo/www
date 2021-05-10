@@ -5187,7 +5187,7 @@ var $author$project$Main$lineFromCommand = function (command) {
 					if (!_v0.b.b) {
 						switch (_v0.a) {
 							case 'help':
-								return $elm$core$Result$Ok('\n        Welcome to the terminal!\n        Type a command to get started.\n        ');
+								return $elm$core$Result$Ok(' Welcome to the terminal!\nType a command to get started.');
 							case 'start':
 								return $elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo');
 							case 'exit':
