@@ -43,7 +43,7 @@ main =
 
 init : () -> (Model, Cmd Msg)
 init flags =
-  (Model [ Line "start" (Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo") ] "", Cmd.none)
+  (Model [ Line "start" (Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help.") ] "", Cmd.none)
 
 type alias Line = {
     input : String,
@@ -136,8 +136,8 @@ lineFromCommand command =
       "joe" :: [ "awesome" ] ->
         Ok "Strinky strink frick!!!! frink you!!! I'ms o sfrickign done w u"
 
-      "echo" :: [ str ] ->
-        Ok str
+      "echo" :: str ->
+        Ok (String.join "" str)
 
       "start" :: [] ->
         Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help."

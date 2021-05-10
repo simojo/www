@@ -5163,7 +5163,7 @@ var $author$project$Main$init = function (flags) {
 					A2(
 					$author$project$Main$Line,
 					'start',
-					$elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo'))
+					$elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help.'))
 				]),
 			''),
 		$elm$core$Platform$Cmd$none);
@@ -5184,10 +5184,24 @@ var $author$project$Main$lineFromCommand = function (command) {
 				if (!_v0.b) {
 					return $elm$core$Result$Ok('');
 				} else {
-					if (_v0.b.b) {
-						if (!_v0.b.b.b) {
-							switch (_v0.a) {
-								case 'joe':
+					switch (_v0.a) {
+						case '?':
+							if (!_v0.b.b) {
+								return $elm$core$Result$Ok('Welcome to the terminal!\nType a command to get started.');
+							} else {
+								break _v0$9;
+							}
+						case 'exit':
+							if (!_v0.b.b) {
+								return $elm$core$Result$Err('Sorry, you can\'t really do that here.');
+							} else {
+								break _v0$9;
+							}
+						case 'joe':
+							if (!_v0.b.b) {
+								return $elm$core$Result$Ok('Hi I\'m joe. I can be annoying, wholesome, or awesome.');
+							} else {
+								if (!_v0.b.b.b) {
 									switch (_v0.b.a) {
 										case 'annoying':
 											var _v1 = _v0.b;
@@ -5201,29 +5215,22 @@ var $author$project$Main$lineFromCommand = function (command) {
 										default:
 											break _v0$9;
 									}
-								case 'echo':
-									var _v4 = _v0.b;
-									var str = _v4.a;
-									return $elm$core$Result$Ok(str);
-								default:
+								} else {
 									break _v0$9;
+								}
 							}
-						} else {
-							break _v0$9;
-						}
-					} else {
-						switch (_v0.a) {
-							case '?':
-								return $elm$core$Result$Ok('Welcome to the terminal!\nType a command to get started.');
-							case 'exit':
-								return $elm$core$Result$Err('Sorry, you can\'t really do that here.');
-							case 'joe':
-								return $elm$core$Result$Ok('Hi I\'m joe. I can be annoying, wholesome, or awesome.');
-							case 'start':
+						case 'echo':
+							var str = _v0.b;
+							return $elm$core$Result$Ok(
+								A2($elm$core$String$join, '', str));
+						case 'start':
+							if (!_v0.b.b) {
 								return $elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help.');
-							default:
+							} else {
 								break _v0$9;
-						}
+							}
+						default:
+							break _v0$9;
 					}
 				}
 			}
