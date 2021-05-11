@@ -5,16 +5,21 @@ import Html.Attributes exposing (..)
 
 -- COMMANDS INDEX --
 
-noOpCommand : Command
-noOpCommand =
+noOpCommand : String -> Command
+noOpCommand command =
   Command ""
     ""
     ""
     []
-    (\x -> Err <| text "")
+    (\x -> Err <| text <| "Command " ++ command ++ " not found.")
 
 commands : List Command
 commands = [
+    Command "clear"
+      "Clears the screen"
+      "clear"
+      []
+      clear,
     Command "echo"
       "Outputs input text"
       "echo hello there!"
@@ -38,6 +43,11 @@ commands = [
   ]
 
 -- COMMAND FUNCTIONS --
+
+clear : List String -> Result (Html Msg) (Html Msg)
+clear args =
+  case args of
+    _ -> Ok <| div [ class "clear" ] []
 
 echo : List String -> Result (Html Msg) (Html Msg)
 echo args =
@@ -99,7 +109,7 @@ start : List String -> Result (Html Msg) (Html Msg)
 start args =
   case args of
     _ ->
-      Ok <| text "Welcome to the terminal!\nType a command to get started."
+      Ok <| text "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help."
 
 -- ######## --
 
@@ -120,20 +130,34 @@ lineFromCommand commandBody =
   commands
   |> List.filter (\x -> x.name == strThisCommand)
   |> List.head
-  |> Maybe.withDefault noOpCommand
+  |> Maybe.withDefault (noOpCommand strThisCommand)
   |> (\x -> x.receiver args)
-  |> (\x -> Line strThisCommand x)
+  |> (\x -> Line commandBody x)
 
 completeCommand : String -> String
 completeCommand input =
   commands
   |> List.filter (\x ->
-    input
-    |> String.toList
-    |> List.filter (\c -> String.contains (String.fromChar c) x.name)
-    |> List.length
-    |> (\i -> i > 0)
+    String.startsWith input x.name
   )
   |> List.map (\x -> x.name)
   |> List.head
-  |> Maybe.withDefault input
+  |> Maybe.withDefault (
+    commands
+    |> List.map (\x ->
+      input
+      |> String.toList
+      |> List.filter (\c -> String.contains (String.fromChar c) x.name)
+      |> List.length
+      |> (\i -> {
+        matches = i,
+        command = x
+      })
+    )
+    |> List.sortBy .matches
+    |> List.reverse
+    |> List.map (\x -> x.command.name)
+    |> List.head
+    |> Maybe.withDefault input
+  )
+

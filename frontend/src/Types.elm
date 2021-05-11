@@ -1,5 +1,6 @@
 module Types exposing (..)
 import Html exposing (Html)
+import Browser.Dom as Dom
 
 type alias Command = {
     name : String,
@@ -22,4 +23,5 @@ type alias Model = {
 type Msg
   = Input String
   | KeyDown Int
-
+  | NoOp
+  | Clear Int

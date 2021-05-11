@@ -21,13 +21,14 @@ body {
   margin: 1em;
 }
 .prompt {
+  display: inline-block;
   color: var(--font-accent-color);
-  width: 20%;
+  width: auto;
 }
 #prompt-line {
-  display: inline;
 }
 #prompt-line > input {
+  display: inline-block;
   outline: none;
   border: 0;
   padding: 0;
@@ -37,6 +38,8 @@ body {
   font-size: 1em;
   font-family: Hack;
   width: 80%;
+}
+#prompt-input {
 }
 ::placeholder {
   color: var(--font-accent-color);
@@ -49,6 +52,7 @@ body {
 }
 li {
   margin: .2em;
+  width: 100%;
   color: var(--font-color);
   white-space: pre-wrap;
 }
@@ -70,4 +74,7 @@ li {
   color: var(--font-color);
 }
 .container {
+}
+.clear {
+  height: 100vh;
 }

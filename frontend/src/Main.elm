@@ -1,5 +1,12 @@
 module Main exposing (..)
 import Browser
+import Command
+import Browser.Dom as Dom
+import Html.Attributes exposing (..)
+import Http
+import Json.Decode as Decode
+import Types exposing (..)
+import Task
 import Html exposing (
     Attribute,
     Html,
@@ -10,7 +17,6 @@ import Html exposing (
     h2,
     h3,
     header,
-    input,
     input,
     label,
     li,
@@ -28,11 +34,6 @@ import Html.Events exposing (
     onClick,
     onInput
   )
-import Http
-import Html.Attributes exposing (..)
-import Json.Decode as Decode
-import Types exposing (..)
-import Command
 
 main : Program () Model Msg
 main =
@@ -45,7 +46,7 @@ main =
 
 init : () -> (Model, Cmd Msg)
 init flags =
-  (Model [ Line "start" (Ok <| text "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help.") ] "", Cmd.none)
+  (Model [ Line "start" (Ok <| text "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help.") ] "", focusPrompt)
 
 -- UPDATE --
 
@@ -56,15 +57,19 @@ update msg model =
       ({ model | input = str}, Cmd.none)
     KeyDown key ->
       case key of
-        13 ->
+        13 -> -- Enter
           ({ model |
              lines = model.lines ++ ((Command.lineFromCommand model.input) :: []),
              input = ""
-          }, Cmd.none)
-        9 ->
-          ({ model | input = (Command.completeCommand model.input)}, Cmd.none)
+          }, focusPrompt)
+        9 -> -- Tab
+          ({ model | input = (Command.completeCommand model.input)}, focusPrompt)
         _ ->
-          (model, Cmd.none)
+          (model, focusPrompt)
+    Clear n ->
+      ({ model | lines = model.lines |> List.take (List.length model.lines - n) }, Cmd.none)
+    NoOp ->
+      (model, Cmd.none)
 
 -- SUBSCRIPTIONS --
 
@@ -116,9 +121,13 @@ promptLine thisValue =
   li [] [
     div [ id "prompt-line" ] [
       prompt,
-      input [ onKeyDown KeyDown, onInput Input, placeholder "", value thisValue] []
+      input [ id "prompt-input", onKeyDown KeyDown, onInput Input, placeholder "", value thisValue, tabindex -1] []
     ]
   ]
+
+focusPrompt : Cmd Msg
+focusPrompt =
+  Task.attempt (\_ -> NoOp) (Dom.focus "prompt-input")
 
 onKeyDown : (Int -> msg) -> Attribute msg
 onKeyDown tagger =
