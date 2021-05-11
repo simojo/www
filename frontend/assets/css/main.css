@@ -21,56 +21,58 @@ body {
   margin: 1em;
 }
 .prompt {
-  display: inline-block;
   color: var(--font-accent-color);
+  display: inline-block;
   width: auto;
 }
-#prompt-line {
-}
-#prompt-line > input {
-  display: inline-block;
-  outline: none;
-  border: 0;
-  padding: 0;
+#prompt-line > input#prompt-input {
   background-color: var(--bg-color);
-  color: var(--font-color);
+  border: 0;
   caret-color: var(--font-color);
-  font-size: 1em;
+  color: var(--font-color);
   font-family: Hack;
+  font-size: 1em;
+  outline: none;
+  padding: 0;
   width: 80%;
 }
 #prompt-input {
+  display: inline-block;
 }
 ::placeholder {
   color: var(--font-accent-color);
 }
 .console > ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
   color: var(--font-color);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li, li > * {
+  font-size: 1em;
+  padding: 0;
 }
 li {
-  margin: .2em;
-  width: 100%;
   color: var(--font-color);
+  margin: .2em;
   white-space: pre-wrap;
+  width: 100%;
 }
 .error {
   color: var(--red);
 }
-.help {
+.help, .help > * {
+  padding: 0;
+  margin: .2em;
+  font-size: 1em;
 }
 .help > h1 {
-  font-size: 1em;
   color: var(--cyan);
 }
 .help > h2 {
-  font-size: 1em;
   color: var(--blue);
 }
 .help > p {
-  font-size: 1em;
   color: var(--font-color);
 }
 .container {
