@@ -5473,23 +5473,28 @@ var $author$project$Command$completeCommand = function (input) {
 								return $.matches;
 							},
 							A2(
-								$elm$core$List$map,
+								$elm$core$List$filter,
 								function (x) {
-									return function (i) {
-										return {command: x, matches: i};
-									}(
-										$elm$core$List$length(
-											A2(
-												$elm$core$List$filter,
-												function (c) {
-													return A2(
-														$elm$core$String$contains,
-														$elm$core$String$fromChar(c),
-														x.name);
-												},
-												$elm$core$String$toList(input))));
+									return x.matches > 0;
 								},
-								$author$project$Command$commands)))))),
+								A2(
+									$elm$core$List$map,
+									function (x) {
+										return function (i) {
+											return {command: x, matches: i};
+										}(
+											$elm$core$List$length(
+												A2(
+													$elm$core$List$filter,
+													function (c) {
+														return A2(
+															$elm$core$String$contains,
+															$elm$core$String$fromChar(c),
+															x.name);
+													},
+													$elm$core$String$toList(input))));
+									},
+									$author$project$Command$commands))))))),
 		$elm$core$List$head(
 			A2(
 				$elm$core$List$map,

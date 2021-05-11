@@ -154,6 +154,7 @@ completeCommand input =
         command = x
       })
     )
+    |> List.filter (\x -> x.matches > 0)
     |> List.sortBy .matches
     |> List.reverse
     |> List.map (\x -> x.command.name)
