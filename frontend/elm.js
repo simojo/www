@@ -5144,26 +5144,29 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$document = _Browser_document;
-var $author$project$Main$Line = F2(
+var $author$project$Types$Line = F2(
 	function (input, output) {
 		return {input: input, output: output};
 	});
-var $author$project$Main$Model = F2(
+var $author$project$Types$Model = F2(
 	function (lines, input) {
 		return {input: input, lines: lines};
 	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$init = function (flags) {
 	return _Utils_Tuple2(
 		A2(
-			$author$project$Main$Model,
+			$author$project$Types$Model,
 			_List_fromArray(
 				[
 					A2(
-					$author$project$Main$Line,
+					$author$project$Types$Line,
 					'start',
-					$elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help.'))
+					$elm$core$Result$Ok(
+						$elm$html$Html$text('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help.')))
 				]),
 			''),
 		$elm$core$Platform$Cmd$none);
@@ -5173,70 +5176,317 @@ var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$none;
 };
-var $author$project$Main$lineFromCommand = function (command) {
-	return A2(
-		$author$project$Main$Line,
-		command,
-		function () {
-			var _v0 = A2($elm$core$String$split, ' ', command);
-			_v0$9:
-			while (true) {
-				if (!_v0.b) {
-					return $elm$core$Result$Ok('');
-				} else {
-					switch (_v0.a) {
-						case '?':
-							if (!_v0.b.b) {
-								return $elm$core$Result$Ok('Welcome to the terminal!\nType a command to get started.');
-							} else {
-								break _v0$9;
-							}
-						case 'exit':
-							if (!_v0.b.b) {
-								return $elm$core$Result$Err('Sorry, you can\'t really do that here.');
-							} else {
-								break _v0$9;
-							}
-						case 'joe':
-							if (!_v0.b.b) {
-								return $elm$core$Result$Ok('Hi I\'m joe. I can be annoying, wholesome, or awesome.');
-							} else {
-								if (!_v0.b.b.b) {
-									switch (_v0.b.a) {
-										case 'annoying':
-											var _v1 = _v0.b;
-											return $elm$core$Result$Ok('Bruh!! This song by the Marias is so cool! It\'s a masterpiece!!! Omg this song is literally a masterpiece!!');
-										case 'wholesome':
-											var _v2 = _v0.b;
-											return $elm$core$Result$Ok('I\'m so happy I finished school.');
-										case 'awesome':
-											var _v3 = _v0.b;
-											return $elm$core$Result$Ok('Strinky strink frick!!!! frink you!!! I\'ms o sfrickign done w u');
-										default:
-											break _v0$9;
-									}
+var $author$project$Types$Command = F5(
+	function (name, desc, usage, args, receiver) {
+		return {args: args, desc: desc, name: name, receiver: receiver, usage: usage};
+	});
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $author$project$Command$echo = function (args) {
+	var s = args;
+	return $elm$core$Result$Ok(
+		$elm$html$Html$text(
+			A2($elm$core$String$join, ' ', s)));
+};
+var $author$project$Command$exit = function (args) {
+	return $elm$core$Result$Err(
+		$elm$html$Html$text('Sorry, you can\'t really do that here.'));
+};
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $author$project$Command$start = function (args) {
+	return $elm$core$Result$Ok(
+		$elm$html$Html$text('Welcome to the terminal!\nType a command to get started.'));
+};
+var $author$project$Command$help = function (args) {
+	if (args.b && (!args.b.b)) {
+		var cmd = args.a;
+		return function (x) {
+			if (x.$ === 'Nothing') {
+				return $elm$core$Result$Err(
+					$elm$html$Html$text('Command ' + (cmd + ' not found.')));
+			} else {
+				var thisCommand = x.a;
+				return $elm$core$Result$Ok(
+					A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('help')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$h1,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('--- ' + (thisCommand.name + ' ---'))
+									])),
+								A2(
+								$elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(thisCommand.desc)
+									])),
+								A2(
+								$elm$html$Html$h2,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('USAGE')
+									])),
+								A2(
+								$elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(thisCommand.usage)
+									])),
+								function () {
+								var _v2 = thisCommand.args;
+								if (!_v2.b) {
+									return $elm$html$Html$text('');
 								} else {
-									break _v0$9;
+									return A2(
+										$elm$html$Html$h2,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('ARGUMENTS')
+											]));
 								}
-							}
-						case 'echo':
-							var str = _v0.b;
-							return $elm$core$Result$Ok(
-								A2($elm$core$String$join, '', str));
-						case 'start':
-							if (!_v0.b.b) {
-								return $elm$core$Result$Ok('Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help.');
-							} else {
-								break _v0$9;
-							}
-						default:
-							break _v0$9;
-					}
-				}
+							}(),
+								A2(
+								$elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(
+										A2($elm$core$String$join, '\n', thisCommand.args))
+									]))
+							])));
 			}
-			var _char = _v0.a;
-			return $elm$core$Result$Err('Error: Command \"' + (_char + '\" not found.'));
-		}());
+		}(
+			$elm$core$List$head(
+				A2(
+					$elm$core$List$filter,
+					function (x) {
+						return _Utils_eq(x.name, cmd);
+					},
+					$author$project$Command$cyclic$commands())));
+	} else {
+		return $elm$core$Result$Ok(
+			A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container')
+					]),
+				A2(
+					$elm$core$List$map,
+					function (thisCommand) {
+						return A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('help')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$h1,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('--- ' + (thisCommand.name + ' ---'))
+										])),
+									A2(
+									$elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(thisCommand.desc)
+										])),
+									A2(
+									$elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('USAGE')
+										])),
+									A2(
+									$elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(thisCommand.usage)
+										])),
+									function () {
+									var _v3 = thisCommand.args;
+									if (!_v3.b) {
+										return $elm$html$Html$text('');
+									} else {
+										return A2(
+											$elm$html$Html$h2,
+											_List_Nil,
+											_List_fromArray(
+												[
+													$elm$html$Html$text('ARGUMENTS')
+												]));
+									}
+								}(),
+									A2(
+									$elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(
+											A2($elm$core$String$join, '\n', thisCommand.args))
+										]))
+								]));
+					},
+					$author$project$Command$cyclic$commands())));
+	}
+};
+function $author$project$Command$cyclic$commands() {
+	return _List_fromArray(
+		[
+			A5($author$project$Types$Command, 'echo', 'Outputs input text', 'echo hello there!', _List_Nil, $author$project$Command$echo),
+			A5($author$project$Types$Command, 'exit', 'Tries to exit, but fails.', 'exit', _List_Nil, $author$project$Command$exit),
+			A5($author$project$Types$Command, 'help', 'Displays help about a command.', 'help echo', _List_Nil, $author$project$Command$help),
+			A5($author$project$Types$Command, 'start', 'Displays startup text.', 'start', _List_Nil, $author$project$Command$start)
+		]);
+}
+try {
+	var $author$project$Command$commands = $author$project$Command$cyclic$commands();
+	$author$project$Command$cyclic$commands = function () {
+		return $author$project$Command$commands;
+	};
+} catch ($) {
+	throw 'Some top-level definitions from `Command` are causing infinite recursion:\n\n  ┌─────┐\n  │    commands\n  │     ↓\n  │    help\n  └─────┘\n\nThese errors are very tricky, so read https://elm-lang.org/0.19.1/bad-recursion to learn how to fix it!';}
+var $elm$core$String$cons = _String_cons;
+var $elm$core$String$fromChar = function (_char) {
+	return A2($elm$core$String$cons, _char, '');
+};
+var $elm$core$String$foldr = _String_foldr;
+var $elm$core$String$toList = function (string) {
+	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
+};
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$Command$completeCommand = function (input) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		input,
+		$elm$core$List$head(
+			A2(
+				$elm$core$List$map,
+				function (x) {
+					return x.name;
+				},
+				A2(
+					$elm$core$List$filter,
+					function (x) {
+						return function (i) {
+							return i > 0;
+						}(
+							$elm$core$List$length(
+								A2(
+									$elm$core$List$filter,
+									function (c) {
+										return A2(
+											$elm$core$String$contains,
+											$elm$core$String$fromChar(c),
+											x.name);
+									},
+									$elm$core$String$toList(input))));
+					},
+					$author$project$Command$commands))));
+};
+var $author$project$Command$noOpCommand = A5(
+	$author$project$Types$Command,
+	'',
+	'',
+	'',
+	_List_Nil,
+	function (x) {
+		return $elm$core$Result$Err(
+			$elm$html$Html$text(''));
+	});
+var $elm$core$List$tail = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(xs);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Command$lineFromCommand = function (commandBody) {
+	var strThisCommand = A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		$elm$core$List$head(
+			A2($elm$core$String$split, ' ', commandBody)));
+	var args = A2(
+		$elm$core$Maybe$withDefault,
+		_List_Nil,
+		$elm$core$List$tail(
+			A2($elm$core$String$split, ' ', commandBody)));
+	return function (x) {
+		return A2($author$project$Types$Line, strThisCommand, x);
+	}(
+		function (x) {
+			return x.receiver(args);
+		}(
+			A2(
+				$elm$core$Maybe$withDefault,
+				$author$project$Command$noOpCommand,
+				$elm$core$List$head(
+					A2(
+						$elm$core$List$filter,
+						function (x) {
+							return _Utils_eq(x.name, strThisCommand);
+						},
+						$author$project$Command$commands)))));
 };
 var $author$project$Main$update = F2(
 	function (msg, model) {
@@ -5249,33 +5499,34 @@ var $author$project$Main$update = F2(
 				$elm$core$Platform$Cmd$none);
 		} else {
 			var key = msg.a;
-			if (key === 13) {
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							lines: _Utils_ap(
-								model.lines,
-								A2(
-									$elm$core$List$cons,
-									$author$project$Main$lineFromCommand(model.input),
-									_List_Nil))
-						}),
-					$elm$core$Platform$Cmd$none);
-			} else {
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			switch (key) {
+				case 13:
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								input: '',
+								lines: _Utils_ap(
+									model.lines,
+									A2(
+										$elm$core$List$cons,
+										$author$project$Command$lineFromCommand(model.input),
+										_List_Nil))
+							}),
+						$elm$core$Platform$Cmd$none);
+				case 9:
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								input: $author$project$Command$completeCommand(model.input)
+							}),
+						$elm$core$Platform$Cmd$none);
+				default:
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			}
 		}
 	});
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$core$List$append = F2(
 	function (xs, ys) {
 		if (!ys.b) {
@@ -5289,8 +5540,6 @@ var $elm$core$List$concat = function (lists) {
 };
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$html$Html$span = _VirtualDom_node('span');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$prompt = A2(
 	$elm$html$Html$span,
 	_List_fromArray(
@@ -5324,20 +5573,18 @@ var $author$project$Main$displayLines = function (lines) {
 								function () {
 								var _v0 = line.output;
 								if (_v0.$ === 'Ok') {
-									var str = _v0.a;
-									return $elm$html$Html$text(str);
+									var html = _v0.a;
+									return html;
 								} else {
-									var str = _v0.a;
+									var html = _v0.a;
 									return A2(
-										$elm$html$Html$span,
+										$elm$html$Html$div,
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$class('error')
 											]),
 										_List_fromArray(
-											[
-												$elm$html$Html$text(str)
-											]));
+											[html]));
 								}
 							}()
 							]))
@@ -5345,11 +5592,10 @@ var $author$project$Main$displayLines = function (lines) {
 			},
 			lines));
 };
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Main$Input = function (a) {
+var $author$project$Types$Input = function (a) {
 	return {$: 'Input', a: a};
 };
-var $author$project$Main$KeyDown = function (a) {
+var $author$project$Types$KeyDown = function (a) {
 	return {$: 'KeyDown', a: a};
 };
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
@@ -5407,31 +5653,35 @@ var $author$project$Main$onKeyDown = function (tagger) {
 		A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$keyCode));
 };
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
-var $author$project$Main$promptLine = A2(
-	$elm$html$Html$li,
-	_List_Nil,
-	_List_fromArray(
-		[
-			A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$id('prompt-line')
-				]),
-			_List_fromArray(
-				[
-					$author$project$Main$prompt,
-					A2(
-					$elm$html$Html$input,
-					_List_fromArray(
-						[
-							$author$project$Main$onKeyDown($author$project$Main$KeyDown),
-							$elm$html$Html$Events$onInput($author$project$Main$Input),
-							$elm$html$Html$Attributes$placeholder('')
-						]),
-					_List_Nil)
-				]))
-		]));
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$Main$promptLine = function (thisValue) {
+	return A2(
+		$elm$html$Html$li,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$id('prompt-line')
+					]),
+				_List_fromArray(
+					[
+						$author$project$Main$prompt,
+						A2(
+						$elm$html$Html$input,
+						_List_fromArray(
+							[
+								$author$project$Main$onKeyDown($author$project$Types$KeyDown),
+								$elm$html$Html$Events$onInput($author$project$Types$Input),
+								$elm$html$Html$Attributes$placeholder(''),
+								$elm$html$Html$Attributes$value(thisValue)
+							]),
+						_List_Nil)
+					]))
+			]));
+};
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$view = function (model) {
 	return {
@@ -5450,7 +5700,10 @@ var $author$project$Main$view = function (model) {
 						_List_Nil,
 						_Utils_ap(
 							$author$project$Main$displayLines(model.lines),
-							A2($elm$core$List$cons, $author$project$Main$promptLine, _List_Nil)))
+							A2(
+								$elm$core$List$cons,
+								$author$project$Main$promptLine(model.input),
+								_List_Nil)))
 					]))
 			]),
 		title: 'Terminal'

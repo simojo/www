@@ -31,6 +31,8 @@ import Html.Events exposing (
 import Http
 import Html.Attributes exposing (..)
 import Json.Decode as Decode
+import Types exposing (..)
+import Command
 
 main : Program () Model Msg
 main =
@@ -43,21 +45,7 @@ main =
 
 init : () -> (Model, Cmd Msg)
 init flags =
-  (Model [ Line "start" (Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help.") ] "", Cmd.none)
-
-type alias Line = {
-    input : String,
-    output : Result String String
-  }
-
-type alias Model = {
-    lines : List Line,
-    input : String
-  }
-
-type Msg
-  = Input String
-  | KeyDown Int
+  (Model [ Line "start" (Ok <| text "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help.") ] "", Cmd.none)
 
 -- UPDATE --
 
@@ -69,7 +57,12 @@ update msg model =
     KeyDown key ->
       case key of
         13 ->
-          ({ model | lines = model.lines ++ ((lineFromCommand model.input) :: []) }, Cmd.none)
+          ({ model |
+             lines = model.lines ++ ((Command.lineFromCommand model.input) :: []),
+             input = ""
+          }, Cmd.none)
+        9 ->
+          ({ model | input = (Command.completeCommand model.input)}, Cmd.none)
         _ ->
           (model, Cmd.none)
 
@@ -87,7 +80,7 @@ view model = {
     body = [
       div [ class "console" ] [
         ul [] (
-          (displayLines model.lines) ++ (promptLine :: [])
+          (displayLines model.lines) ++ (promptLine model.input :: [])
         )
       ]
     ]
@@ -105,58 +98,25 @@ displayLines lines =
       ],
       li [] [
         case line.output of
-          Ok str ->
-            text str
-          Err str ->
-            span [ class "error" ] [ text str ]
+          Ok html ->
+            html
+          Err html ->
+            div [ class "error" ] [ html ]
       ]
     ]
   )
   |> List.concat
 
-lineFromCommand : String -> Line
-lineFromCommand command =
-  Line
-    command
-    (case String.split " " command of
-      [] ->
-        Ok ""
-      "?" :: [] ->
-        Ok "Welcome to the terminal!\nType a command to get started."
-
-      "exit" :: [] ->
-        Err "Sorry, you can't really do that here."
-
-      "joe" :: [] ->
-        Ok "Hi I'm joe. I can be annoying, wholesome, or awesome."
-      "joe" :: [ "annoying" ] ->
-        Ok "Bruh!! This song by the Marias is so cool! It's a masterpiece!!! Omg this song is literally a masterpiece!!"
-      "joe" :: [ "wholesome" ] ->
-        Ok "I'm so happy I finished school."
-      "joe" :: [ "awesome" ] ->
-        Ok "Strinky strink frick!!!! frink you!!! I'ms o sfrickign done w u"
-
-      "echo" :: str ->
-        Ok (String.join "" str)
-
-      "start" :: [] ->
-        Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"?\" for help."
-
-      char :: _ ->
-        Err <| "Error: Command \"" ++ char ++ "\" not found."
-    )
-
-
 prompt : Html Msg
 prompt =
   span [ class "prompt" ] [ text "you@here - " ]
 
-promptLine : Html Msg
-promptLine =
+promptLine : String -> Html Msg
+promptLine thisValue =
   li [] [
     div [ id "prompt-line" ] [
       prompt,
-      input [ onKeyDown KeyDown, onInput Input, placeholder ""] []
+      input [ onKeyDown KeyDown, onInput Input, placeholder "", value thisValue] []
     ]
   ]
 

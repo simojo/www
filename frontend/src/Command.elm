@@ -1,44 +1,36 @@
-module Command exposing (Command, lineFromCommand)
+module Command exposing (lineFromCommand, completeCommand)
+import Types exposing (..)
 import Html exposing (..)
-import Main exposing (Line, Msg)
-
-type alias Command = {
-    name : String,
-    desc : String,
-    usage : String,
-    args : List String,
-    receiver : List String -> Html Msg
-  }
-
-type alias Argument = {
-    name : String,
-    desc : String
-  }
+import Html.Attributes exposing (..)
 
 -- COMMANDS INDEX --
 
+noOpCommand : Command
+noOpCommand =
+  Command ""
+    ""
+    ""
+    []
+    (\x -> Err <| text "")
+
 commands : List Command
 commands = [
-    Command
-      "echo"
+    Command "echo"
       "Outputs input text"
       "echo hello there!"
       []
       echo,
-    Command
-      "exit"
+    Command "exit"
       "Tries to exit, but fails."
       "exit"
       []
       exit,
-    Command
-      "help"
+    Command "help"
       "Displays help about a command."
       "help echo"
       []
       help,
-    Command
-      "start"
+    Command "start"
       "Displays startup text."
       "start"
       []
@@ -47,19 +39,19 @@ commands = [
 
 -- COMMAND FUNCTIONS --
 
-echo : List String -> Html Msg
+echo : List String -> Result (Html Msg) (Html Msg)
 echo args =
   case args of
     s ->
-      text (String.join " " s)
+      Ok <| text (String.join " " s)
 
-exit : List String -> Html Msg
+exit : List String -> Result (Html Msg) (Html Msg)
 exit args =
   case args of
     _ ->
-      text "Sorry, you can't really do that here."
+      Err <| text "Sorry, you can't really do that here."
 
-help : List String -> Html Msg
+help : List String -> Result (Html Msg) (Html Msg)
 help args =
   case args of
     cmd :: [] ->
@@ -69,40 +61,79 @@ help args =
         |> (\x ->
           case x of
             Nothing ->
-              text ""
+              Err <| text ("Command " ++ cmd ++ " not found.")
             Just thisCommand ->
-              text thisCommand.desc
+              Ok <| div [ class "help" ] [
+                h1 [] [ text ("--- " ++ thisCommand.name ++ " ---") ],
+                p [] [ text thisCommand.desc ],
+                h2 [] [ text "USAGE" ],
+                p [] [ text thisCommand.usage ],
+                case thisCommand.args of
+                  [] ->
+                    text ""
+                  _ ->
+                    h2 [] [ text "ARGUMENTS" ],
+                    p [] [ text <| String.join "\n" thisCommand.args ]
+              ]
         )
     _ ->
-      text "Welcome to the terminal!\nType a command to get started."
+      Ok <| div [ class "container" ] (
+        commands
+        |> List.map (\thisCommand ->
+          div [ class "help" ] [
+          h1 [] [ text ("--- " ++ thisCommand.name ++ " ---") ],
+          p [] [ text thisCommand.desc ],
+          h2 [] [ text "USAGE" ],
+          p [] [ text thisCommand.usage ],
+          case thisCommand.args of
+            [] ->
+              text ""
+            _ ->
+              h2 [] [ text "ARGUMENTS" ],
+              p [] [ text <| String.join "\n" thisCommand.args ]
+          ]
+        )
+      )
 
-start : List String -> Html Msg
+start : List String -> Result (Html Msg) (Html Msg)
 start args =
   case args of
     _ ->
-      text "Welcome to the terminal!\nType a command to get started."
+      Ok <| text "Welcome to the terminal!\nType a command to get started."
 
 -- ######## --
 
 lineFromCommand : String -> Line
-lineFromCommand command =
-  Line
-    command
-    (case String.split " " command of
-      [] ->
-        Ok ""
-      "help" :: [] ->
-        Ok "Welcome to the terminal!\nType a command to get started."
+lineFromCommand commandBody =
+  let
+    args =
+      commandBody
+      |> String.split " "
+      |> List.tail
+      |> Maybe.withDefault []
+    strThisCommand =
+      commandBody
+      |> String.split " "
+      |> List.head
+      |> Maybe.withDefault ""
+  in
+  commands
+  |> List.filter (\x -> x.name == strThisCommand)
+  |> List.head
+  |> Maybe.withDefault noOpCommand
+  |> (\x -> x.receiver args)
+  |> (\x -> Line strThisCommand x)
 
-      "exit" :: [] ->
-        Err "Sorry, you can't really do that here."
-
-      "echo" :: str ->
-        Ok (String.join "" str)
-
-      "start" :: [] ->
-        Ok "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help."
-
-      char :: _ ->
-        Err <| "Error: Command \"" ++ char ++ "\" not found."
-    )
+completeCommand : String -> String
+completeCommand input =
+  commands
+  |> List.filter (\x ->
+    input
+    |> String.toList
+    |> List.filter (\c -> String.contains (String.fromChar c) x.name)
+    |> List.length
+    |> (\i -> i > 0)
+  )
+  |> List.map (\x -> x.name)
+  |> List.head
+  |> Maybe.withDefault input

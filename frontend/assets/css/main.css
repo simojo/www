@@ -1,10 +1,15 @@
 :root {
+  --bg-color: #0d0d0d;
   --font-color: #F5F5F5;
   --font-accent-color: #404040;
-  --bg-color: #0d0d0d;
-  --bg-accent-color: #262626;
-  --bg-accent-color-rgb: 38, 38, 38;
-  --error: #F7768E;
+  --red: #F7768E;
+  --green: #9ECE6A;
+  --yellow: #E0AF68;
+  --blue: #7AA2F7;
+  --magenta: #FC5FA2;
+  --cyan: #4ABAAF;
+  --white: #ACB0D0;
+
 }
 body {
   background-color: var(--bg-color);
@@ -17,16 +22,24 @@ body {
 }
 .prompt {
   color: var(--font-accent-color);
+  width: 20%;
+}
+#prompt-line {
+  display: inline;
 }
 #prompt-line > input {
   outline: none;
   border: 0;
+  padding: 0;
   background-color: var(--bg-color);
   color: var(--font-color);
   caret-color: var(--font-color);
-  font-size: 25px;
+  font-size: 1em;
   font-family: Hack;
-  width: 80vw;
+  width: 80%;
+}
+::placeholder {
+  color: var(--font-accent-color);
 }
 .console > ul {
   list-style-type: none;
@@ -40,5 +53,21 @@ li {
   white-space: pre-wrap;
 }
 .error {
-  color: var(--error);
+  color: var(--red);
+}
+.help {
+}
+.help > h1 {
+  font-size: 1em;
+  color: var(--cyan);
+}
+.help > h2 {
+  font-size: 1em;
+  color: var(--blue);
+}
+.help > p {
+  font-size: 1em;
+  color: var(--font-color);
+}
+.container {
 }
