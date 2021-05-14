@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Http
 import Json.Decode as Decode
 import Types exposing (..)
+import Keyboard
 import Task
 import Html exposing (
     Attribute,
@@ -53,21 +54,12 @@ init flags =
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    Input str ->
-      ({ model | input = str}, Cmd.none)
+    TextInput str ->
+      ({ model | current = (Line str model.current.output) }, Cmd.none)
     KeyDown key ->
-      case key of
-        13 -> -- Enter
-          ({ model |
-             lines = model.lines ++ ((Command.lineFromCommand model.input) :: []),
-             input = ""
-          }, focusPrompt)
-        9 -> -- Tab
-          ({ model | input = (Command.completeCommand model.input)}, focusPrompt)
-        _ ->
-          (model, focusPrompt)
-    Clear n ->
-      ({ model | lines = model.lines |> List.take (List.length model.lines - n) }, Cmd.none)
+      (Keydown.handleKeyDown key model, focusPrompt)
+    CommandSent cmd ->
+      (Command.handleCommand cmd model, Cmd.none)
     NoOp ->
       (model, Cmd.none)
 
@@ -85,7 +77,7 @@ view model = {
     body = [
       div [ class "console" ] [
         ul [] (
-          (displayLines model.lines) ++ (promptLine model.input :: [])
+          (displayLines model.history) ++ (promptLine model.current)
         )
       ]
     ]
@@ -116,19 +108,19 @@ prompt : Html Msg
 prompt =
   span [ class "prompt" ] [ text "you@here - " ]
 
-promptLine : String -> Html Msg
-promptLine thisValue =
-  li [] [
-    div [ id "prompt-line" ] [
-      prompt,
-      input [ id "prompt-input", onKeyDown KeyDown, onInput Input, placeholder "", value thisValue, tabindex -1] []
+promptLine : Line -> List Html Msg
+promptLine currentLine = (
+    li [] [
+      div [ id "prompt-line" ] [
+        prompt,
+        input [ id "prompt-input", Keyboard.onKeyDown KeyDown, onInput TextInput, placeholder "", value thisValue, tabindex -1] []
+      ]
+    ],
+    li [] [
+      currentLine.output
     ]
-  ]
+  )
 
 focusPrompt : Cmd Msg
 focusPrompt =
   Task.attempt (\_ -> NoOp) (Dom.focus "prompt-input")
-
-onKeyDown : (Int -> msg) -> Attribute msg
-onKeyDown tagger =
-  on "keydown" (Decode.map tagger keyCode)

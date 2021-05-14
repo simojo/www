@@ -5,75 +5,82 @@ import Html.Attributes exposing (..)
 
 -- COMMANDS INDEX --
 
-noOpCommand : String -> Command
-noOpCommand command =
-  Command ""
-    ""
-    ""
-    []
-    (\x -> Err <| text <| "Command " ++ command ++ " not found.")
-
 commands : List Command
 commands = [
     Command "clear"
       "Clears the screen"
       "clear"
       []
-      clear,
+      Clear,
     Command "echo"
       "Outputs input text"
       "echo hello there!"
       []
-      echo,
+      Echo,
     Command "exit"
       "Tries to exit, but fails."
       "exit"
       []
-      exit,
+      Exit,
     Command "help"
       "Displays help about a command."
       "help echo"
       []
-      help,
+      Help,
     Command "start"
       "Displays startup text."
       "start"
       []
-      start
+      Start
   ]
+
+handleCommand : CommandMsg -> Model -> Model
+handleCommand cmd model =
+  case cmd of
+    Clear ->
+      clear model
+    Echo str ->
+      echo str model
+    Exit ->
+      exit model
+    Help thisCmd ->
+      help thisCmd model
+    Start ->
+      start model
 
 -- COMMAND FUNCTIONS --
 
-clear : List String -> Result (Html Msg) (Html Msg)
-clear args =
-  case args of
-    _ -> Ok <| div [ class "clear" ] []
+clear : Model -> Model
+clear model =
+  { model | history = [] }
 
-echo : List String -> Result (Html Msg) (Html Msg)
-echo args =
-  case args of
-    s ->
-      Ok <| text (String.join " " s)
+echo : String -> Model -> Model
+echo str model =
+  { model | history =
+    outputOk <| text <| str
+    :: model.history
+  }
 
-exit : List String -> Result (Html Msg) (Html Msg)
-exit args =
-  case args of
-    _ ->
-      Err <| text "Sorry, you can't really do that here."
+exit : Model -> Model
+exit model =
+  { model | history =
+    outputErr <| text "Sorry, you can't really do that here."
+    :: model.history
+  }
 
-help : List String -> Result (Html Msg) (Html Msg)
-help args =
-  case args of
-    cmd :: [] ->
+help : (Maybe String) -> Model -> Model
+help cmd model =
+  case cmd of
+    Just cmdStr ->
       commands
-        |> List.filter (\x -> x.name == cmd)
+        |> List.filter (\x -> x.name == cmdStr)
         |> List.head
         |> (\x ->
           case x of
             Nothing ->
-              Err <| text ("Command " ++ cmd ++ " not found.")
+              outputErr <| text ("Command " ++ cmd ++ " not found.")
             Just thisCommand ->
-              Ok <| div [ class "help" ] [
+              outputOk <| div [ class "help" ] [
                 h1 [] [ text ("--- " ++ thisCommand.name ++ " ---") ],
                 p [] [ text thisCommand.desc ],
                 h2 [] [ text "USAGE" ],
@@ -105,11 +112,12 @@ help args =
         )
       )
 
-start : List String -> Result (Html Msg) (Html Msg)
-start args =
-  case args of
-    _ ->
-      Ok <| text "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help."
+start : Model -> Model
+start model =
+  { model | history =
+    outputOk <| text "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help."
+    :: model.history
+  }
 
 -- ######## --
 
@@ -162,3 +170,12 @@ completeCommand input =
     |> Maybe.withDefault input
   )
 
+-- HELPERS --
+
+outputOk : Html Msg -> Line
+outputOk html =
+  (Line <| Output <| Ok <| html)
+
+outputErr : Html Msg -> Line
+outputErr html =
+  (Line <| Output <| Err <| html)

@@ -7,21 +7,31 @@ type alias Command = {
     desc : String,
     usage : String,
     args : List String,
-    receiver : List String -> Result (Html Msg) (Html Msg)
+    msg : CommandMsg
   }
 
 type alias Line = {
-    input : String,
-    output : Result (Html Msg) (Html Msg)
+    content : LineKind
   }
 
+type LineKind
+  = Input String
+  | Output (Result (Html Msg) (Html Msg))
+
 type alias Model = {
-    lines : List Line,
-    input : String
+    history : List Line,
+    current : Line
   }
 
 type Msg
-  = Input String
+  = TextInput String
   | KeyDown Int
+  | CommandSent CommandMsg
   | NoOp
-  | Clear Int
+
+type CommandMsg
+  = Clear
+  | Echo String
+  | Exit
+  | Help (Maybe String)
+  | Start
