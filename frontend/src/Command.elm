@@ -119,12 +119,14 @@ handleCommand commandBody model =
       |> String.split " "
       |> List.head
       |> Maybe.withDefault ""
+    updatedModel =
+      { model | history = Input commandBody :: model.history }
   in
-  commands
-  |> List.filter (\x -> x.name == strThisCommand)
-  |> List.head
-  |> Maybe.withDefault (notFoundCommand strThisCommand)
-  |> (\x -> x.receiver args model)
+    commands
+    |> List.filter (\x -> x.name == strThisCommand)
+    |> List.head
+    |> Maybe.withDefault (notFoundCommand strThisCommand)
+    |> (\x -> x.receiver args updatedModel)
 
 completeCommand : String -> Model -> Model
 completeCommand input model =
@@ -157,7 +159,7 @@ completeCommand input model =
       one :: [] ->
         { model | current = one }
       many ->
-        { model | history = (list |> List.map (\x -> outputOk <| text x)) ++ model.history }
+        { model | belowprompt = Just <| ul [] (list |> List.map (\x -> li [] [ text x ])) }
   )
 
 -- HELPERS --

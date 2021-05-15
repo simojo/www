@@ -24,7 +24,7 @@ type alias Prompt = {
 type alias Model = {
     history : List Line,
     current : String,
-    belowprompt : Maybe Line,
+    belowprompt : Maybe (Html Msg),
     prompt : Prompt
   }
 

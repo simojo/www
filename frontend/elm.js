@@ -5426,11 +5426,13 @@ var $elm$core$String$cons = _String_cons;
 var $elm$core$String$fromChar = function (_char) {
 	return A2($elm$core$String$cons, _char, '');
 };
+var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$core$List$sortBy = _List_sortBy;
 var $elm$core$String$foldr = _String_foldr;
 var $elm$core$String$toList = function (string) {
 	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
 };
+var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $elm$core$Maybe$withDefault = F2(
 	function (_default, maybe) {
 		if (maybe.$ === 'Just') {
@@ -5498,15 +5500,22 @@ var $author$project$Command$completeCommand = F2(
 					return _Utils_update(
 						model,
 						{
-							history: _Utils_ap(
+							belowprompt: $elm$core$Maybe$Just(
 								A2(
-									$elm$core$List$map,
-									function (x) {
-										return $author$project$Command$outputOk(
-											$elm$html$Html$text(x));
-									},
-									list),
-								model.history)
+									$elm$html$Html$ul,
+									_List_Nil,
+									A2(
+										$elm$core$List$map,
+										function (x) {
+											return A2(
+												$elm$html$Html$li,
+												_List_Nil,
+												_List_fromArray(
+													[
+														$elm$html$Html$text(x)
+													]));
+										},
+										list)))
 						});
 				}
 			}
@@ -5523,6 +5532,9 @@ var $author$project$Command$completeCommand = F2(
 					},
 					$author$project$Command$commands)));
 	});
+var $author$project$Types$Input = function (a) {
+	return {$: 'Input', a: a};
+};
 var $author$project$Command$notFoundCommand = function (cmd) {
 	return A5(
 		$author$project$Types$Command,
@@ -5554,6 +5566,14 @@ var $elm$core$List$tail = function (list) {
 };
 var $author$project$Command$handleCommand = F2(
 	function (commandBody, model) {
+		var updatedModel = _Utils_update(
+			model,
+			{
+				history: A2(
+					$elm$core$List$cons,
+					$author$project$Types$Input(commandBody),
+					model.history)
+			});
 		var strThisCommand = A2(
 			$elm$core$Maybe$withDefault,
 			'',
@@ -5565,7 +5585,7 @@ var $author$project$Command$handleCommand = F2(
 			$elm$core$List$tail(
 				A2($elm$core$String$split, ' ', commandBody)));
 		return function (x) {
-			return A2(x.receiver, args, model);
+			return A2(x.receiver, args, updatedModel);
 		}(
 			A2(
 				$elm$core$Maybe$withDefault,
@@ -5580,6 +5600,9 @@ var $author$project$Command$handleCommand = F2(
 	});
 var $author$project$Keyboard$handleKeyDown = F2(
 	function (key, model) {
+		var updatedModel = _Utils_update(
+			model,
+			{belowprompt: $elm$core$Maybe$Nothing});
 		switch (key) {
 			case 13:
 				var _v1 = model.current;
@@ -5596,7 +5619,14 @@ var $author$project$Keyboard$handleKeyDown = F2(
 						});
 				} else {
 					var commandBody = _v1;
-					return A2($author$project$Command$handleCommand, commandBody, model);
+					return function (x) {
+						return A2($author$project$Command$handleCommand, commandBody, x);
+					}(
+						function (x) {
+							return _Utils_update(
+								x,
+								{current: ''});
+						}(updatedModel));
 				}
 			case 9:
 				var _v2 = model.current;
@@ -5604,7 +5634,7 @@ var $author$project$Keyboard$handleKeyDown = F2(
 					return model;
 				} else {
 					var str = _v2;
-					return A2($author$project$Command$completeCommand, str, model);
+					return A2($author$project$Command$completeCommand, str, updatedModel);
 				}
 			default:
 				return model;
@@ -5631,7 +5661,6 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
-var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$prompt = function (promptInfo) {
 	return A2(
@@ -5808,7 +5837,6 @@ var $author$project$Main$promptLine = F2(
 						]))
 				]));
 	});
-var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
@@ -5827,8 +5855,15 @@ var $author$project$Main$view = function (model) {
 						$elm$core$List$reverse(
 							A2(
 								$elm$core$List$cons,
-								A2($author$project$Main$promptLine, model.current, model.prompt),
-								A2($author$project$Main$displayLines, model.history, model.prompt))))
+								A3(
+									$elm$core$Basics$apL,
+									$elm$core$Maybe$withDefault,
+									$elm$html$Html$text(''),
+									model.belowprompt),
+								A2(
+									$elm$core$List$cons,
+									A2($author$project$Main$promptLine, model.current, model.prompt),
+									A2($author$project$Main$displayLines, model.history, model.prompt)))))
 					]))
 			]),
 		title: 'Shell'

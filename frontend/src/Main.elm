@@ -79,7 +79,8 @@ view model = {
     body = [
       div [ class "console" ] [
         ul [] (
-          (promptLine model.current model.prompt)
+          (model.belowprompt |> (Maybe.withDefault <| text ""))
+          :: (promptLine model.current model.prompt)
           :: (displayLines model.history model.prompt)
           |> List.reverse
         )

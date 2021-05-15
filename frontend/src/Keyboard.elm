@@ -10,19 +10,25 @@ import Html.Events exposing (
 
 handleKeyDown : Int -> Model -> Model
 handleKeyDown key model =
+  let
+    updatedModel =
+      { model | belowprompt = Nothing }
+  in
   case key of
     13 -> -- Enter
       case model.current of
         "" ->
           { model | history = (Output <| Ok <| text "") :: model.history}
         commandBody ->
-          Command.handleCommand commandBody model
+          updatedModel
+          |> (\x -> { x | current = "" })
+          |> (\x -> Command.handleCommand commandBody x)
     9 -> -- Tab
       case model.current of
         "" ->
           model
         str ->
-          Command.completeCommand str model
+          Command.completeCommand str updatedModel
     _ ->
       model
 
