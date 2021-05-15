@@ -18,13 +18,13 @@ type alias Prompt = {
     user : String,
     host : String,
     cwd : String,
-    tag : String
+    tag : Maybe String
   }
 
 type alias Model = {
     history : List Line,
-    current : Line,
-    belowprompt : Line,
+    current : String,
+    belowprompt : Maybe Line,
     prompt : Prompt
   }
 

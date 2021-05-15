@@ -45,8 +45,13 @@ main =
   }
 
 init : () -> (Model, Cmd Msg)
-init flags =
-  (Model [ Line "start" (Ok <| text "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help.") ] "", focusPrompt)
+init flags = (
+  Model
+    [ Output (Ok <| text "Elm shell - (c) 2021\nSimon Jones - https://github.com/simojo\nType \"help\" for help.") ]
+    ""
+    Nothing
+    (Prompt "you" "here" "~" Nothing),
+    focusPrompt)
 
 -- UPDATE --
 
@@ -54,9 +59,9 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     TextInput str ->
-      ({ model | current = Input str }, Cmd.none)
+      ({ model | current = str }, Cmd.none)
     KeyDown key ->
-      (Keydown.handleKeyDown key model, focusPrompt)
+      (Keyboard.handleKeyDown key model, focusPrompt)
     NoOp ->
       (model, Cmd.none)
 
@@ -70,11 +75,13 @@ subscriptions model =
 
 view : Model -> (Browser.Document Msg)
 view model = {
-    title = "Terminal",
+    title = "Shell",
     body = [
       div [ class "console" ] [
         ul [] (
-          (promptLine model.current) ++ (displayLines model.history)
+          (promptLine model.current model.prompt)
+          :: (displayLines model.history model.prompt)
+          |> List.reverse
         )
       ]
     ]
@@ -82,39 +89,52 @@ view model = {
 
 -- HELPERS --
 
-displayLines : List Line -> List (Html Msg)
-displayLines lines =
+displayLines : List Line -> Prompt -> List (Html Msg)
+displayLines lines promptInfo =
   lines
-  |> List.map (\line -> [
-      li [] [
-        prompt,
-        text line.input
-      ],
-      li [] [
-        case line.output of
-          Ok html ->
-            html
-          Err html ->
-            div [ class "error" ] [ html ]
-      ]
-    ]
+  |> List.map (\line ->
+    case line of
+      Input str ->
+        li [] [
+          prompt promptInfo,
+          text str
+        ]
+      Output result ->
+        li [] [
+          case result of
+            Ok html ->
+              html
+            Err html ->
+              div [ class "error" ] [ html ]
+        ]
   )
-  |> List.concat
 
-prompt : Html Msg
-prompt =
-  span [ class "prompt" ] [ text "you@here - " ]
+prompt : Prompt -> Html Msg
+prompt promptInfo =
+  span [ class "prompt" ] [
+    text <| promptInfo.user
+    ++ "@"
+    ++ promptInfo.host
+    ++ " "
+    ++ promptInfo.cwd
+    ++ " ",
+    case promptInfo.tag of
+      Nothing ->
+        text ""
+      Just tag ->
+        span [ class "prompt-tag" ] [
+          text tag
+        ]
+  ]
 
-promptLine : Line -> List Html Msg
-promptLine currentLine = (
+
+promptLine : String -> Prompt -> Html Msg
+promptLine inputValue promptInfo = (
     li [] [
       div [ id "prompt-line" ] [
-        prompt,
-        input [ id "prompt-input", Keyboard.onKeyDown KeyDown, onInput TextInput, placeholder "", value thisValue, tabindex -1] []
+        prompt promptInfo,
+        input [ id "prompt-input", Keyboard.onKeyDown KeyDown, onInput TextInput, placeholder "", value inputValue, tabindex -1] []
       ]
-    ],
-    li [] [
-      currentLine.output
     ]
   )
 

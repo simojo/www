@@ -153,9 +153,9 @@ completeCommand input model =
         |> List.map (\x -> x.command.name)
         |> List.head
         |> Maybe.withDefault input
-        |> (\x -> { model | current = Input x })
+        |> (\x -> { model | current = x })
       one :: [] ->
-        { model | current = Input one }
+        { model | current = one }
       many ->
         { model | history = (list |> List.map (\x -> outputOk <| text x)) ++ model.history }
   )

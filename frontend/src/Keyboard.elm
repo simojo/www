@@ -13,16 +13,16 @@ handleKeyDown key model =
   case key of
     13 -> -- Enter
       case model.current of
-        Input commandBody ->
-          Command.handleCommand commandBody model
-        Input "" ->
+        "" ->
           { model | history = (Output <| Ok <| text "") :: model.history}
+        commandBody ->
+          Command.handleCommand commandBody model
     9 -> -- Tab
       case model.current of
-        Input str ->
-          Command.completeCommand str model
-        Input "" ->
+        "" ->
           model
+        str ->
+          Command.completeCommand str model
     _ ->
       model
 
