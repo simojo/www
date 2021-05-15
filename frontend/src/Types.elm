@@ -7,31 +7,28 @@ type alias Command = {
     desc : String,
     usage : String,
     args : List String,
-    msg : CommandMsg
+    receiver : (List String) -> Model -> Model
   }
 
-type alias Line = {
-    content : LineKind
-  }
-
-type LineKind
+type Line
   = Input String
   | Output (Result (Html Msg) (Html Msg))
 
+type alias Prompt = {
+    user : String,
+    host : String,
+    cwd : String,
+    tag : String
+  }
+
 type alias Model = {
     history : List Line,
-    current : Line
+    current : Line,
+    belowprompt : Line,
+    prompt : Prompt
   }
 
 type Msg
   = TextInput String
   | KeyDown Int
-  | CommandSent CommandMsg
   | NoOp
-
-type CommandMsg
-  = Clear
-  | Echo String
-  | Exit
-  | Help (Maybe String)
-  | Start

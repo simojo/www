@@ -4,7 +4,6 @@ import Command
 import Browser.Dom as Dom
 import Html.Attributes exposing (..)
 import Http
-import Json.Decode as Decode
 import Types exposing (..)
 import Keyboard
 import Task
@@ -55,11 +54,9 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     TextInput str ->
-      ({ model | current = (Line str model.current.output) }, Cmd.none)
+      ({ model | current = Input str }, Cmd.none)
     KeyDown key ->
       (Keydown.handleKeyDown key model, focusPrompt)
-    CommandSent cmd ->
-      (Command.handleCommand cmd model, Cmd.none)
     NoOp ->
       (model, Cmd.none)
 
@@ -77,7 +74,7 @@ view model = {
     body = [
       div [ class "console" ] [
         ul [] (
-          (displayLines model.history) ++ (promptLine model.current)
+          (promptLine model.current) ++ (displayLines model.history)
         )
       ]
     ]
