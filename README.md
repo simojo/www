@@ -1,3 +1,3 @@
-# www.simonjjones.com
+# simonjjones.com
 
 My website
