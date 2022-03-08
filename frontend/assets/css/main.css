@@ -129,17 +129,10 @@ li {
   margin: .2em;
 }
 img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden
-  flex-shrink: 0;
-  min-width: 100%;
-  min-height: 100%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border-radius: 20px;
-  -moz-border-radius: 5vh;
+  text-align: center;
+  width: 20em;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .error-msg {
   padding: 1em;
