@@ -89,7 +89,46 @@ How do you get the resource ready to use? Are there inputs to know? Please show 
     teensy-loader-cli --mcu=teensyXX teensyXX.hex # teensy-loader-cli will already be installed via PlatformIO
     ```
   - here is a sample output of running `pio run`:
-  ![piorun.png](piorun.png)
+    ```sh
+    Processing teensy41 (platform: teensy; framework: arduino; board: teensy35)
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    Verbose mode can be enabled via `-v, --verbose` option
+    CONFIGURATION: https://docs.platformio.org/page/boards/teensy/teensy35.html
+    PLATFORM: Teensy (4.13.1) > Teensy 3.5
+    HARDWARE: MK64FX512 120MHz, 255.99KB RAM, 512KB Flash
+    DEBUG: Current (jlink) External (jlink)
+    PACKAGES:
+    - framework-arduinoteensy 1.154.0 (1.54)
+    - toolchain-gccarmnoneeabi 1.50401.190816 (5.4.1)
+    LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+    LDF Modes: Finder ~ chain, Compatibility ~ soft
+    Found 93 compatible libraries
+    Scanning dependencies...
+    Dependency Graph
+    |-- <Audio> 1.3
+    |   |-- <SerialFlash>
+    |   |   |-- <SPI> 1.0
+    |   |-- <SPI> 1.0
+    |   |-- <Wire> 1.0
+    |   |-- <SD> 2.0.0
+    |   |   |-- <SdFat> 2.0.5-beta.1
+    |   |   |   |-- <SPI> 1.0
+    |-- <SD> 2.0.0
+    |   |-- <SdFat> 2.0.5-beta.1
+    |   |   |-- <SPI> 1.0
+    |-- <SPI> 1.0
+    |-- <SerialFlash>
+    |   |-- <SPI> 1.0
+    |-- <Wire> 1.0
+    Building in release mode
+    Linking .pio/build/teensy41/firmware.elf
+    Checking size .pio/build/teensy41/firmware.elf
+    Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+    RAM:   [          ]   3.4% (used 8800 bytes from 262136 bytes)
+    Flash: [          ]   3.0% (used 15508 bytes from 524288 bytes)
+    Building .pio/build/teensy41/firmware.hex
+    =============================================================================== [SUCCESS] Took 1.95 seconds ===============================================================================
+    ```
 
 ---
 
