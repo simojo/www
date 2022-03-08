@@ -304,7 +304,7 @@ displayPost post =
 makePostBody : String -> Html msg
 makePostBody str =
   if String.length str > 0 then
-    Markdown.toHtml [] str
+    Markdown.toHtml [id "post-body"] str
     -- ul [] (
     --   str
     --   |> String.split "\n"
