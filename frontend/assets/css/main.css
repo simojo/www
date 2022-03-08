@@ -36,7 +36,7 @@ body {
   font-size: 25px;
   font-family: Hack;
 }
-h1, h2, h3, p, a, li {
+h1, h2, h3, p, a, li, code {
   color: var(--font-accent-color);
   transition: var(--transition);
   white-space: pre-wrap;
@@ -44,6 +44,11 @@ h1, h2, h3, p, a, li {
 p {
   font-size: 1em;
   color: var(--font-color);
+}
+code {
+  background-color: var(--bg-accent-color);
+  color: var(--bg-accent-color);
+  padding: 1em;
 }
 .socialicon {
   padding: 10px;
@@ -123,13 +128,11 @@ p {
 li {
   margin: .2em;
 }
-.fill {
+img {
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden
-}
-.fill img {
   flex-shrink: 0;
   min-width: 100%;
   min-height: 100%;
