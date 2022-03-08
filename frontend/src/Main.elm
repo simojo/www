@@ -15,6 +15,7 @@ import Html.Events exposing (onClick, onCheck)
 import Http
 import Html.Attributes exposing (class, id, href, target, type_, for)
 import Json.Decode as Decode
+import Markdown exposing (toHtml)
 
 main : Program () Model Msg
 main =
@@ -303,18 +304,19 @@ displayPost post =
 makePostBody : String -> Html msg
 makePostBody str =
   if String.length str > 0 then
-    ul [] (
-      str
-      |> String.split "\n"
-      |> List.map (\line ->
-        li [] [
-          if String.length line > 0 then
-            text line
-          else
-            p [] []
-        ]
-      )
-    )
+    Markdown.toHtml [] str
+    -- ul [] (
+    --   str
+    --   |> String.split "\n"
+    --   |> List.map (\line ->
+    --     li [] [
+    --       if String.length line > 0 then
+    --         text line
+    --       else
+    --         p [] []
+    --     ]
+    --   )
+    -- )
   else
     text ""
 
