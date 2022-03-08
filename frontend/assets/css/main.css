@@ -36,12 +36,12 @@ body {
   font-size: 25px;
   font-family: Hack;
 }
-h1, h2, h3, p, a, li {
+h1, h2, h3, p, a {
   color: var(--font-accent-color);
   transition: var(--transition);
   white-space: pre-wrap;
 }
-p {
+p, li {
   font-size: 1em;
   color: var(--font-color);
 }
