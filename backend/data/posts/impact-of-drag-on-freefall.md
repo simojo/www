@@ -1,6 +1,6 @@
 # Impact of Drag on Freefall
 ## Physics modeling that utilizes nim/rust to preform computations
-### 4 12 2020
+### 2020-04-12
 
 As a capstone project for PHYS 110, we wrote about and modeled the impact of drag on the freefall of an object by showing the levels of Kinetic Energy, Potential Energy, Speed, and the Work of Drag on the object as it was falling. I saw this as a great opportunity to learn Nim, as it is type safe and would run much faster than python while still being as syntactically sweet as python.
 

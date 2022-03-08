@@ -1,6 +1,6 @@
 # comtube
 ## Python module that Converts YouTube videos into comic books
-### 24 11 2020
+### 2020-11-24
 
 Being a frequent user of YouTube, I created a program to turn YouTube videos into a comic books for my CMPSC 100 course project. It's implemented in python and uses a couple of libraries to get things such as the video title, closed captioning, and to work with images and videos.
 
