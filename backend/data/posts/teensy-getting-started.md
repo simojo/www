@@ -59,7 +59,7 @@ Where do you find this software resource? Is it an open source project? an onlin
 Include steps of all necessary steps to get the software to run (for example, installations). Include the commands to run if necessary.
 
 - Assuming you have PlatformIO installed
-	  - `pio project init --project-dir YOUR_DIRECTORY --board teensyXX`, where `XX` corresponds to the Teensy version you purchased
+  - `pio project init --project-dir YOUR_DIRECTORY --board teensyXX`, where `XX` corresponds to the Teensy version you purchased
   - `cd YOUR_DIRECTORY`
   - Edit `src/main.c`
   - `pio run` (compiling code)
