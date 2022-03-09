@@ -39,27 +39,31 @@ body {
 h1, h2, h3, p, a, li, code {
   color: var(--font-accent-color);
   transition: var(--transition);
-  white-space: pre-wrap;
 }
 p, li {
   font-size: 1em;
   color: var(--font-color);
+  line-height: 40px;
 }
 pre {
   background-color: var(--bg-accent-color);
-  padding: 0.3em 0.6em;
+  padding: 0.2em 0.4em;
   border-radius: 0.2em;
 }
 code {
   background-color: var(--bg-accent-color);
-  padding: 0.3em 0.6em;
+  padding: 0.2em 0.4em;
   border-radius: 0.2em;
+  white-space: pre-wrap;
   color: var(--font-color);
 }
 pre > code {
   background-color: none;
   padding: 0;
   border-radius: 0;
+}
+hr {
+  border: solid 1px var(--bg-accent-color);
 }
 .socialicon {
   padding: 10px;

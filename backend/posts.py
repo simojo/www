@@ -27,7 +27,7 @@ class Posts:
             day = int(dateSplit[2])
             date = datetime(year, month, day)
             # body -> leftover text
-            body = re.sub(r"^(#.*)\n", "", txt, flags=re.MULTILINE).lstrip().rstrip()
+            body = "\n".join(txt.split("\n")[4:]).lstrip().rstrip()
             fname = re.findall(".*(?=\.md)", path)[0]
             result.append(Structs.Post(
                 id = fname,
