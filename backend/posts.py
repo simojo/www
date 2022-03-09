@@ -36,6 +36,7 @@ class Posts:
                 date = date,
                 body = body
             ))
+        result.sort(key=lambda i: i.date, reverse=True)
         Globals.postsCache.addRange(result)
 
     @staticmethod
