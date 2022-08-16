@@ -1,38 +1,61 @@
-@font-face { 
+@font-face {
   font-family: "Harding";  
   src: url("/fonts/HardingText-Regular-Web.woff2")format("woff2"); 
 }
-@font-face { 
+@font-face {
   font-family: "Harding";  
   src: url("/fonts/HardingText-BoldItalic-Web.woff2")format("woff2"); 
   font-style: italic;
 }
-@font-face { 
+@font-face {
   font-family: "Harding";  
   src: url("/fonts/HardingText-Bold-Web.woff2")format("woff2"); 
   font-weight: bold;
 }
 @font-face {
-  font-family: "Roboto Mono";  
-  src: url("/fonts/RobotoMono-Italic-VariableFont_wght.ttf")format("truetype"); 
+  font-family: "Roboto Mono";
+  src: url("/fonts/RobotoMono-Italic-VariableFont_wght.ttf")format("truetype");
   font-style: italic;
 }
-@font-face { 
-  font-family: "Roboto Mono";  
-  src: url("/fonts/RobotoMono-VariableFont_wght.ttf")format("truetype"); 
-}
-
-:root {
-  --bg: #fffff;
-  --fg: #303030;
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("/fonts/RobotoMono-VariableFont_wght.ttf")format("truetype");
 }
 
 html, body {
 	position: relative;
+	font-size: 16px;
 	width: 100%;
 	height: 100%;
 	background-color: var(--bg);
 	color: var(--fg);
+	line-height: 22px;
+}
+
+:root {
+  --bg: #ffffff;
+  --bg1: #f2f2f2;
+  --bg2: #c2c2c2;
+  --bg3: #808080;
+  --fg: #303030;
+}
+
+.container {
+  text-align: left;
+}
+
+@media all and (min-width: 1920px) { 
+  .container {
+    width: 100rem;
+    margin: 0 auto;
+  }
+}
+
+@media all and (max-width: 1919px) {
+  .container {
+    width: 50rem;
+    margin: 0 auto;
+  }
 }
 
 body {
@@ -44,6 +67,9 @@ body {
 
 pre {
   font-family: Roboto Mono;
+  background-color: var(--bg1);
+  padding: 1rem;
+  margin: auto;
 }
 
 a {

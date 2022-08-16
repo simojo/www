@@ -1552,6 +1552,7 @@ var app = (function () {
     const file = "src/Home.svelte";
 
     function create_fragment$1(ctx) {
+    	let div;
     	let h40;
     	let t1;
     	let pre;
@@ -1573,14 +1574,15 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
+    			div = element("div");
     			h40 = element("h4");
     			h40.textContent = "Hi. I'm Simon";
     			t1 = space();
     			pre = element("pre");
-    			pre.textContent = "  1 + 1 = 2\n  How many pickles does it take to get to the moon?\n";
+    			pre.textContent = `${"$ echo 'cat man'\n$ rustc main.rs\n$./main"}`;
     			t3 = space();
     			h41 = element("h4");
-    			h41.textContent = "In Congress, July 4, 1776";
+    			h41.textContent = "ψ In Congress, July 4, 1776";
     			t5 = space();
     			p0 = element("p");
     			p0.textContent = "The unanimous Declaration of the thirteen united States of America, When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.";
@@ -1599,62 +1601,48 @@ var app = (function () {
     			t15 = space();
     			p5 = element("p");
     			p5.textContent = "He has called together legislative bodies at places unusual, uncomfortable, and distant from the depository of their public Records, for the sole purpose of fatiguing them into compliance with his measures.";
-    			t17 = text("\nHe has dissolved Representative Houses repeatedly, for opposing with manly firmness his invasions on the rights of the people.\n\nHe has refused for a long time, after such dissolutions, to cause others to be elected; whereby the Legislative powers, incapable of Annihilation, have returned to the People at large for their exercise; the State remaining in the mean time exposed to all the dangers of invasion from without, and convulsions within.\n\nHe has endeavoured to prevent the population of these States; for that purpose obstructing the Laws for Naturalization of Foreigners; refusing to pass others to encourage their migrations hither, and raising the conditions of new Appropriations of Lands.\n\nHe has obstructed the Administration of Justice, by refusing his Assent to Laws for establishing Judiciary powers.\n\nHe has made Judges dependent on his Will alone, for the tenure of their offices, and the amount and payment of their salaries.\n\nHe has erected a multitude of New Offices, and sent hither swarms of Officers to harrass our people, and eat out their substance.\n\nHe has kept among us, in times of peace, Standing Armies without the Consent of our legislatures.\n\nHe has affected to render the Military independent of and superior to the Civil power.\n\nHe has combined with others to subject us to a jurisdiction foreign to our constitution, and unacknowledged by our laws; giving his Assent to their Acts of pretended Legislation:\n\nFor Quartering large bodies of armed troops among us:\n\nFor protecting them, by a mock Trial, from punishment for any Murders which they should commit on the Inhabitants of these States:\n\nFor cutting off our Trade with all parts of the world:\n\nFor imposing Taxes on us without our Consent:\n\nFor depriving us in many cases, of the benefits of Trial by Jury:\n\nFor transporting us beyond Seas to be tried for pretended offences\n\nFor abolishing the free System of English Laws in a neighbouring Province, establishing therein an Arbitrary government, and enlarging its Boundaries so as to render it at once an example and fit instrument for introducing the same absolute rule into these Colonies:\n\nFor taking away our Charters, abolishing our most valuable Laws, and altering fundamentally the Forms of our Governments:\n\nFor suspending our own Legislatures, and declaring themselves invested with power to legislate for us in all cases whatsoever.\n\nHe has abdicated Government here, by declaring us out of his Protection and waging War against us.\n\nHe has plundered our seas, ravaged our Coasts, burnt our towns, and destroyed the lives of our people.\n\nHe is at this time transporting large Armies of foreign Mercenaries to compleat the works of death, desolation and tyranny, already begun with circumstances of Cruelty & perfidy scarcely paralleled in the most barbarous ages, and totally unworthy the Head of a civilized nation.\n\nHe has constrained our fellow Citizens taken Captive on the high Seas to bear Arms against their Country, to become the executioners of their friends and Brethren, or to fall themselves by their Hands.\n\nHe has excited domestic insurrections amongst us, and has endeavoured to bring on the inhabitants of our frontiers, the merciless Indian Savages, whose known rule of warfare, is an undistinguished destruction of all ages, sexes and conditions.\n\nIn every stage of these Oppressions We have Petitioned for Redress in the most humble terms: Our repeated Petitions have been answered only by repeated injury. A Prince whose character is thus marked by every act which may define a Tyrant, is unfit to be the ruler of a free people.\n\nNor have We been wanting in attentions to our Brittish brethren. We have warned them from time to time of attempts by their legislature to extend an unwarrantable jurisdiction over us. We have reminded them of the circumstances of our emigration and settlement here. We have appealed to their native justice and magnanimity, and we have conjured them by the ties of our common kindred to disavow these usurpations, which, would inevitably interrupt our connections and correspondence. They too have been deaf to the voice of justice and of consanguinity. We must, therefore, acquiesce in the necessity, which denounces our Separation, and hold them, as we hold the rest of mankind, Enemies in War, in Peace Friends.\n\nWe, therefore, the Representatives of the united States of America, in General Congress, Assembled, appealing to the Supreme Judge of the world for the rectitude of our intentions, do, in the Name, and by Authority of the good People of these Colonies, solemnly publish and declare, That these United Colonies are, and of Right ought to be Free and Independent States; that they are Absolved from all Allegiance to the British Crown, and that all political connection between them and the State of Great Britain, is and ought to be totally dissolved; and that as Free and Independent States, they have full Power to levy War, conclude Peace, contract Alliances, establish Commerce, and to do all other Acts and Things which Independent States may of right do. And for the support of this Declaration, with a firm reliance on the protection of divine Providence, we mutually pledge to each other our Lives, our Fortunes and our sacred Honor.");
-    			add_location(h40, file, 16, 0, 528);
-    			add_location(pre, file, 17, 0, 551);
-    			add_location(h41, file, 21, 0, 628);
-    			add_location(p0, file, 25, 0, 666);
-    			add_location(p1, file, 28, 0, 1150);
-    			add_location(p2, file, 31, 0, 2788);
-    			add_location(p3, file, 34, 0, 2886);
-    			add_location(p4, file, 37, 0, 3116);
-    			add_location(p5, file, 40, 0, 3356);
+    			t17 = text("\n  He has dissolved Representative Houses repeatedly, for opposing with manly firmness his invasions on the rights of the people.\n\n  He has refused for a long time, after such dissolutions, to cause others to be elected; whereby the Legislative powers, incapable of Annihilation, have returned to the People at large for their exercise; the State remaining in the mean time exposed to all the dangers of invasion from without, and convulsions within.\n\n  He has endeavoured to prevent the population of these States; for that purpose obstructing the Laws for Naturalization of Foreigners; refusing to pass others to encourage their migrations hither, and raising the conditions of new Appropriations of Lands.\n\n  He has obstructed the Administration of Justice, by refusing his Assent to Laws for establishing Judiciary powers.\n\n  He has made Judges dependent on his Will alone, for the tenure of their offices, and the amount and payment of their salaries.\n\n  He has erected a multitude of New Offices, and sent hither swarms of Officers to harrass our people, and eat out their substance.\n\n  He has kept among us, in times of peace, Standing Armies without the Consent of our legislatures.\n\n  He has affected to render the Military independent of and superior to the Civil power.\n\n  He has combined with others to subject us to a jurisdiction foreign to our constitution, and unacknowledged by our laws; giving his Assent to their Acts of pretended Legislation:\n\n  For Quartering large bodies of armed troops among us:\n\n  For protecting them, by a mock Trial, from punishment for any Murders which they should commit on the Inhabitants of these States:\n\n  For cutting off our Trade with all parts of the world:\n\n  For imposing Taxes on us without our Consent:\n\n  For depriving us in many cases, of the benefits of Trial by Jury:\n\n  For transporting us beyond Seas to be tried for pretended offences\n\n  For abolishing the free System of English Laws in a neighbouring Province, establishing therein an Arbitrary government, and enlarging its Boundaries so as to render it at once an example and fit instrument for introducing the same absolute rule into these Colonies:\n\n  For taking away our Charters, abolishing our most valuable Laws, and altering fundamentally the Forms of our Governments:\n\n  For suspending our own Legislatures, and declaring themselves invested with power to legislate for us in all cases whatsoever.\n\n  He has abdicated Government here, by declaring us out of his Protection and waging War against us.\n\n  He has plundered our seas, ravaged our Coasts, burnt our towns, and destroyed the lives of our people.\n\n  He is at this time transporting large Armies of foreign Mercenaries to compleat the works of death, desolation and tyranny, already begun with circumstances of Cruelty & perfidy scarcely paralleled in the most barbarous ages, and totally unworthy the Head of a civilized nation.\n\n  He has constrained our fellow Citizens taken Captive on the high Seas to bear Arms against their Country, to become the executioners of their friends and Brethren, or to fall themselves by their Hands.\n\n  He has excited domestic insurrections amongst us, and has endeavoured to bring on the inhabitants of our frontiers, the merciless Indian Savages, whose known rule of warfare, is an undistinguished destruction of all ages, sexes and conditions.\n\n  In every stage of these Oppressions We have Petitioned for Redress in the most humble terms: Our repeated Petitions have been answered only by repeated injury. A Prince whose character is thus marked by every act which may define a Tyrant, is unfit to be the ruler of a free people.\n\n  Nor have We been wanting in attentions to our Brittish brethren. We have warned them from time to time of attempts by their legislature to extend an unwarrantable jurisdiction over us. We have reminded them of the circumstances of our emigration and settlement here. We have appealed to their native justice and magnanimity, and we have conjured them by the ties of our common kindred to disavow these usurpations, which, would inevitably interrupt our connections and correspondence. They too have been deaf to the voice of justice and of consanguinity. We must, therefore, acquiesce in the necessity, which denounces our Separation, and hold them, as we hold the rest of mankind, Enemies in War, in Peace Friends.\n\n  We, therefore, the Representatives of the united States of America, in General Congress, Assembled, appealing to the Supreme Judge of the world for the rectitude of our intentions, do, in the Name, and by Authority of the good People of these Colonies, solemnly publish and declare, That these United Colonies are, and of Right ought to be Free and Independent States; that they are Absolved from all Allegiance to the British Crown, and that all political connection between them and the State of Great Britain, is and ought to be totally dissolved; and that as Free and Independent States, they have full Power to levy War, conclude Peace, contract Alliances, establish Commerce, and to do all other Acts and Things which Independent States may of right do. And for the support of this Declaration, with a firm reliance on the protection of divine Providence, we mutually pledge to each other our Lives, our Fortunes and our sacred Honor.");
+    			add_location(h40, file, 17, 2, 554);
+    			add_location(pre, file, 18, 2, 579);
+    			add_location(h41, file, 19, 2, 639);
+    			add_location(p0, file, 23, 2, 690);
+    			add_location(p1, file, 26, 2, 1180);
+    			add_location(p2, file, 29, 2, 2824);
+    			add_location(p3, file, 32, 2, 2928);
+    			add_location(p4, file, 35, 2, 3164);
+    			add_location(p5, file, 38, 2, 3410);
+    			attr_dev(div, "class", "container");
+    			add_location(div, file, 16, 0, 528);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, h40, anchor);
-    			insert_dev(target, t1, anchor);
-    			insert_dev(target, pre, anchor);
-    			insert_dev(target, t3, anchor);
-    			insert_dev(target, h41, anchor);
-    			insert_dev(target, t5, anchor);
-    			insert_dev(target, p0, anchor);
-    			insert_dev(target, t7, anchor);
-    			insert_dev(target, p1, anchor);
-    			insert_dev(target, t9, anchor);
-    			insert_dev(target, p2, anchor);
-    			insert_dev(target, t11, anchor);
-    			insert_dev(target, p3, anchor);
-    			insert_dev(target, t13, anchor);
-    			insert_dev(target, p4, anchor);
-    			insert_dev(target, t15, anchor);
-    			insert_dev(target, p5, anchor);
-    			insert_dev(target, t17, anchor);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, h40);
+    			append_dev(div, t1);
+    			append_dev(div, pre);
+    			append_dev(div, t3);
+    			append_dev(div, h41);
+    			append_dev(div, t5);
+    			append_dev(div, p0);
+    			append_dev(div, t7);
+    			append_dev(div, p1);
+    			append_dev(div, t9);
+    			append_dev(div, p2);
+    			append_dev(div, t11);
+    			append_dev(div, p3);
+    			append_dev(div, t13);
+    			append_dev(div, p4);
+    			append_dev(div, t15);
+    			append_dev(div, p5);
+    			append_dev(div, t17);
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h40);
-    			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(pre);
-    			if (detaching) detach_dev(t3);
-    			if (detaching) detach_dev(h41);
-    			if (detaching) detach_dev(t5);
-    			if (detaching) detach_dev(p0);
-    			if (detaching) detach_dev(t7);
-    			if (detaching) detach_dev(p1);
-    			if (detaching) detach_dev(t9);
-    			if (detaching) detach_dev(p2);
-    			if (detaching) detach_dev(t11);
-    			if (detaching) detach_dev(p3);
-    			if (detaching) detach_dev(t13);
-    			if (detaching) detach_dev(p4);
-    			if (detaching) detach_dev(t15);
-    			if (detaching) detach_dev(p5);
-    			if (detaching) detach_dev(t17);
+    			if (detaching) detach_dev(div);
     		}
     	};
 
