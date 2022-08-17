@@ -1552,7 +1552,6 @@ var app = (function () {
     const file = "src/Home.svelte";
 
     function create_fragment$1(ctx) {
-    	let div;
     	let h40;
     	let t1;
     	let pre;
@@ -1574,7 +1573,6 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div = element("div");
     			h40 = element("h4");
     			h40.textContent = "Hi. I'm Simon";
     			t1 = space();
@@ -1602,47 +1600,61 @@ var app = (function () {
     			p5 = element("p");
     			p5.textContent = "He has called together legislative bodies at places unusual, uncomfortable, and distant from the depository of their public Records, for the sole purpose of fatiguing them into compliance with his measures.";
     			t17 = text("\n  He has dissolved Representative Houses repeatedly, for opposing with manly firmness his invasions on the rights of the people.\n\n  He has refused for a long time, after such dissolutions, to cause others to be elected; whereby the Legislative powers, incapable of Annihilation, have returned to the People at large for their exercise; the State remaining in the mean time exposed to all the dangers of invasion from without, and convulsions within.\n\n  He has endeavoured to prevent the population of these States; for that purpose obstructing the Laws for Naturalization of Foreigners; refusing to pass others to encourage their migrations hither, and raising the conditions of new Appropriations of Lands.\n\n  He has obstructed the Administration of Justice, by refusing his Assent to Laws for establishing Judiciary powers.\n\n  He has made Judges dependent on his Will alone, for the tenure of their offices, and the amount and payment of their salaries.\n\n  He has erected a multitude of New Offices, and sent hither swarms of Officers to harrass our people, and eat out their substance.\n\n  He has kept among us, in times of peace, Standing Armies without the Consent of our legislatures.\n\n  He has affected to render the Military independent of and superior to the Civil power.\n\n  He has combined with others to subject us to a jurisdiction foreign to our constitution, and unacknowledged by our laws; giving his Assent to their Acts of pretended Legislation:\n\n  For Quartering large bodies of armed troops among us:\n\n  For protecting them, by a mock Trial, from punishment for any Murders which they should commit on the Inhabitants of these States:\n\n  For cutting off our Trade with all parts of the world:\n\n  For imposing Taxes on us without our Consent:\n\n  For depriving us in many cases, of the benefits of Trial by Jury:\n\n  For transporting us beyond Seas to be tried for pretended offences\n\n  For abolishing the free System of English Laws in a neighbouring Province, establishing therein an Arbitrary government, and enlarging its Boundaries so as to render it at once an example and fit instrument for introducing the same absolute rule into these Colonies:\n\n  For taking away our Charters, abolishing our most valuable Laws, and altering fundamentally the Forms of our Governments:\n\n  For suspending our own Legislatures, and declaring themselves invested with power to legislate for us in all cases whatsoever.\n\n  He has abdicated Government here, by declaring us out of his Protection and waging War against us.\n\n  He has plundered our seas, ravaged our Coasts, burnt our towns, and destroyed the lives of our people.\n\n  He is at this time transporting large Armies of foreign Mercenaries to compleat the works of death, desolation and tyranny, already begun with circumstances of Cruelty & perfidy scarcely paralleled in the most barbarous ages, and totally unworthy the Head of a civilized nation.\n\n  He has constrained our fellow Citizens taken Captive on the high Seas to bear Arms against their Country, to become the executioners of their friends and Brethren, or to fall themselves by their Hands.\n\n  He has excited domestic insurrections amongst us, and has endeavoured to bring on the inhabitants of our frontiers, the merciless Indian Savages, whose known rule of warfare, is an undistinguished destruction of all ages, sexes and conditions.\n\n  In every stage of these Oppressions We have Petitioned for Redress in the most humble terms: Our repeated Petitions have been answered only by repeated injury. A Prince whose character is thus marked by every act which may define a Tyrant, is unfit to be the ruler of a free people.\n\n  Nor have We been wanting in attentions to our Brittish brethren. We have warned them from time to time of attempts by their legislature to extend an unwarrantable jurisdiction over us. We have reminded them of the circumstances of our emigration and settlement here. We have appealed to their native justice and magnanimity, and we have conjured them by the ties of our common kindred to disavow these usurpations, which, would inevitably interrupt our connections and correspondence. They too have been deaf to the voice of justice and of consanguinity. We must, therefore, acquiesce in the necessity, which denounces our Separation, and hold them, as we hold the rest of mankind, Enemies in War, in Peace Friends.\n\n  We, therefore, the Representatives of the united States of America, in General Congress, Assembled, appealing to the Supreme Judge of the world for the rectitude of our intentions, do, in the Name, and by Authority of the good People of these Colonies, solemnly publish and declare, That these United Colonies are, and of Right ought to be Free and Independent States; that they are Absolved from all Allegiance to the British Crown, and that all political connection between them and the State of Great Britain, is and ought to be totally dissolved; and that as Free and Independent States, they have full Power to levy War, conclude Peace, contract Alliances, establish Commerce, and to do all other Acts and Things which Independent States may of right do. And for the support of this Declaration, with a firm reliance on the protection of divine Providence, we mutually pledge to each other our Lives, our Fortunes and our sacred Honor.");
-    			add_location(h40, file, 17, 2, 554);
-    			add_location(pre, file, 18, 2, 579);
-    			add_location(h41, file, 19, 2, 639);
-    			add_location(p0, file, 23, 2, 690);
-    			add_location(p1, file, 26, 2, 1180);
-    			add_location(p2, file, 29, 2, 2824);
-    			add_location(p3, file, 32, 2, 2928);
-    			add_location(p4, file, 35, 2, 3164);
-    			add_location(p5, file, 38, 2, 3410);
-    			attr_dev(div, "class", "container");
-    			add_location(div, file, 16, 0, 528);
+    			add_location(h40, file, 16, 2, 530);
+    			add_location(pre, file, 17, 2, 555);
+    			add_location(h41, file, 18, 2, 615);
+    			add_location(p0, file, 22, 2, 666);
+    			add_location(p1, file, 25, 2, 1156);
+    			add_location(p2, file, 28, 2, 2800);
+    			add_location(p3, file, 31, 2, 2904);
+    			add_location(p4, file, 34, 2, 3140);
+    			add_location(p5, file, 37, 2, 3386);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, h40);
-    			append_dev(div, t1);
-    			append_dev(div, pre);
-    			append_dev(div, t3);
-    			append_dev(div, h41);
-    			append_dev(div, t5);
-    			append_dev(div, p0);
-    			append_dev(div, t7);
-    			append_dev(div, p1);
-    			append_dev(div, t9);
-    			append_dev(div, p2);
-    			append_dev(div, t11);
-    			append_dev(div, p3);
-    			append_dev(div, t13);
-    			append_dev(div, p4);
-    			append_dev(div, t15);
-    			append_dev(div, p5);
-    			append_dev(div, t17);
+    			insert_dev(target, h40, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, pre, anchor);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, h41, anchor);
+    			insert_dev(target, t5, anchor);
+    			insert_dev(target, p0, anchor);
+    			insert_dev(target, t7, anchor);
+    			insert_dev(target, p1, anchor);
+    			insert_dev(target, t9, anchor);
+    			insert_dev(target, p2, anchor);
+    			insert_dev(target, t11, anchor);
+    			insert_dev(target, p3, anchor);
+    			insert_dev(target, t13, anchor);
+    			insert_dev(target, p4, anchor);
+    			insert_dev(target, t15, anchor);
+    			insert_dev(target, p5, anchor);
+    			insert_dev(target, t17, anchor);
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(h40);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(pre);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(h41);
+    			if (detaching) detach_dev(t5);
+    			if (detaching) detach_dev(p0);
+    			if (detaching) detach_dev(t7);
+    			if (detaching) detach_dev(p1);
+    			if (detaching) detach_dev(t9);
+    			if (detaching) detach_dev(p2);
+    			if (detaching) detach_dev(t11);
+    			if (detaching) detach_dev(p3);
+    			if (detaching) detach_dev(t13);
+    			if (detaching) detach_dev(p4);
+    			if (detaching) detach_dev(t15);
+    			if (detaching) detach_dev(p5);
+    			if (detaching) detach_dev(t17);
     		}
     	};
 
@@ -1846,7 +1858,14 @@ var app = (function () {
     const file$2 = "src/App.svelte";
 
     function create_fragment$3(ctx) {
-    	let main;
+    	let div0;
+    	let a0;
+    	let t1;
+    	let a1;
+    	let t3;
+    	let a2;
+    	let t5;
+    	let div1;
     	let router;
     	let current;
 
@@ -1857,17 +1876,39 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			main = element("main");
+    			div0 = element("div");
+    			a0 = element("a");
+    			a0.textContent = "Simon Jones";
+    			t1 = space();
+    			a1 = element("a");
+    			a1.textContent = "Posts";
+    			t3 = space();
+    			a2 = element("a");
+    			a2.textContent = "Posts";
+    			t5 = space();
+    			div1 = element("div");
     			create_component(router.$$.fragment);
-    			attr_dev(main, "class", "svelte-1h6otfa");
-    			add_location(main, file$2, 11, 0, 225);
+    			add_location(a0, file$2, 29, 2, 553);
+    			add_location(a1, file$2, 30, 2, 574);
+    			add_location(a2, file$2, 31, 2, 589);
+    			attr_dev(div0, "id", "navbar");
+    			add_location(div0, file$2, 28, 0, 533);
+    			attr_dev(div1, "class", "container");
+    			add_location(div1, file$2, 33, 0, 609);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, main, anchor);
-    			mount_component(router, main, null);
+    			insert_dev(target, div0, anchor);
+    			append_dev(div0, a0);
+    			append_dev(div0, t1);
+    			append_dev(div0, a1);
+    			append_dev(div0, t3);
+    			append_dev(div0, a2);
+    			insert_dev(target, t5, anchor);
+    			insert_dev(target, div1, anchor);
+    			mount_component(router, div1, null);
     			current = true;
     		},
     		p: noop,
@@ -1881,7 +1922,9 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(main);
+    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(t5);
+    			if (detaching) detach_dev(div1);
     			destroy_component(router);
     		}
     	};
@@ -1907,16 +1950,25 @@ var app = (function () {
     		"*": Home
     	};
 
+    	let drywrap = component => wrap({ asyncComponent: () => import(component) });
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({ Router, Home, Postpage, routes });
+    	$$self.$capture_state = () => ({
+    		Router,
+    		wrap,
+    		Home,
+    		Postpage,
+    		routes,
+    		drywrap
+    	});
 
     	$$self.$inject_state = $$props => {
     		if ('routes' in $$props) $$invalidate(0, routes = $$props.routes);
+    		if ('drywrap' in $$props) drywrap = $$props.drywrap;
     	};
 
     	if ($$props && "$$inject" in $$props) {

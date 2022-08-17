@@ -38,24 +38,44 @@ html, body {
   --bg2: #c2c2c2;
   --bg3: #808080;
   --fg: #303030;
+  --fg1: #505050;
 }
 
 .container {
   text-align: left;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox */
+  box-sizing: border-box;
 }
 
-@media all and (min-width: 1920px) { 
+@media all and (min-width: 750px) {
   .container {
-    width: 100rem;
+    width: 45rem;
     margin: 0 auto;
   }
 }
 
-@media all and (max-width: 1919px) {
+@media all and (max-width: 749px) {
   .container {
-    width: 50rem;
-    margin: 0 auto;
+    padding: 2rem;
+    min-width: 15rem;
+    width: 100%;
   }
+}
+
+#navbar {
+  position: absolute;
+  top: 0;
+  height: 2rem;
+  background-color: var(--bg);
+  border-bottom: 2px solid var(--bg1);
+  width: 100vw;
+  font-family: Roboto Mono;
+  color: var(--fg1);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+
 }
 
 body {
@@ -73,51 +93,17 @@ pre {
 }
 
 a {
-	color: rgb(0,100,200);
+	color: var(--fg1);
 	text-decoration: none;
+	padding: 1rem;
+	border-right: 2px solid var(--bg1);
 }
 
 a:hover {
 	text-decoration: underline;
+	background-color: var(--bg1);
 }
 
 a:visited {
-	color: rgb(0,80,160);
-}
-
-label {
-	display: block;
-}
-
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-}
-
-input:disabled {
-	color: #ccc;
-}
-
-button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
-}
-
-button:disabled {
-	color: #999;
-}
-
-button:not(:disabled):active {
-	background-color: #ddd;
-}
-
-button:focus {
-	border-color: #666;
+	color: var(--fg1);
 }

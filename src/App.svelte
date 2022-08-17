@@ -1,5 +1,6 @@
 <script>
 	import Router from 'svelte-spa-router';
+  import {wrap} from "svelte-spa-router/wrap";
   import Home from './Home.svelte';
   import Postpage from './Postpage.svelte';
   let routes = {
@@ -7,12 +8,10 @@
     "/": Home,
     "*": Home,
   };
+  let drywrap = (component) => wrap({
+      asyncComponent: () => import(component)
+    });
 </script>
-
-<main>
-  <Router {routes} />
-</main>
-
 <style>
 	main {
 		text-align: center;
@@ -27,3 +26,11 @@
 		}
 	}
 </style>
+<div id="navbar">
+  <a>Simon Jones</a>
+  <a>Posts</a>
+  <a>Posts</a>
+</div>
+<div class="container">
+<Router {routes} />
+</div>
