@@ -1,5 +1,6 @@
 <script>
 	import Router from 'svelte-spa-router';
+  import {push} from 'svelte-spa-router';
   import {wrap} from "svelte-spa-router/wrap";
   import Home from './Home.svelte';
   import Postpage from './Postpage.svelte';
@@ -27,9 +28,17 @@
 	}
 </style>
 <div id="navbar">
-  <a>Simon Jones</a>
-  <a>Posts</a>
-  <a>Posts</a>
+  <a class="nav" on:click={() => {
+    push("/posts/hannahismylove");
+  }}>Simon Jones</a>
+  <a class="nav">Posts</a>
+  <a class="nav">Posts</a>
+  <a class="nav">Posts</a>
+  <a class="nav">Posts</a>
+  <a class="nav">Posts</a>
+  <a class="nav">Posts</a>
+  <a class="nav">Posts</a>
+  <a class="nav">Posts</a>
 </div>
 <div class="container">
 <Router {routes} />
