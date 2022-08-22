@@ -2,6 +2,8 @@
 ## assignment04 - understanding the gap
 ### 2022-03-015
 
+$$f(x) = \int_{-\infty}^{+\infty}\frac{\partial \dot{z}}{y}$$
+
 This article talks about the gap where I do not understand things about my future research interest. I also present methods by which I will minimize this gap and get closer to the understanding of the people who are presenting this research.
 
 1. Summarize the knowledge gap that emerges from your chosen research area.
