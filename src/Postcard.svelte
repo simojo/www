@@ -1,9 +1,6 @@
 <script>
   import {push} from "svelte-spa-router";
-  export let postid = undefined;
-  export let title = undefined;
-  export let subtitle = undefined;
-  export let date = undefined;
+  export let postobj = undefined;
 </script>
 
 <style>
@@ -18,14 +15,22 @@
   a.postcard:hover {
     border: 1px solid var(--bg2);
   }
+  span.date {
+    font-family: Roboto Mono;
+    font-size: smaller;
+    color: var(--fg1);
+  }
+  h2 {
+    margin-top: 0.3rem;
+  }
 </style>
 
-{#if title !== undefined}
+{#if postobj.title !== undefined}
   <a class="postcard" on:click={() => {
-    push("/posts/" + postid);
+    push(`/posts/${postobj.postid}`);
   }}>
-    <h2>{title}</h2>
-    <p>{subtitle}</p>
-    <h5>{date}</h5>
+    <span class="date">{postobj.date}</span>
+    <h2>{postobj.title}</h2>
+    <p>{postobj.subtitle}</p>
   </a>
 {/if}

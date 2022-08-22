@@ -6,13 +6,15 @@
   async function parseIntoPostObj(s) {
     let text = "";
     await fetch(s.download_url)
-      .then(x => text = x.text())
+      .then(x => x.text())
+      .then(x => text = x)
       .catch(x => console.error(x));
     let ret = {
-      postid: s.name.match(/.*(?=\.md)/),
+      postid: s.name.match(/.*(?=\.md)/g)[0],
       title: text.split("\n")[0].match(/(?<=# ).*/g)[0],
       subtitle: text.split("\n")[1].match(/(?<=## ).*/g)[0],
       date: text.split("\n")[2].match(/(?<=### ).*/g)[0],
+      text: text.split("\n").slice(3),
     };
     console.log(ret);
     postObjs = [...postObjs, ret];
@@ -27,7 +29,6 @@
         .catch(error => console.error(error));
   }
   loadData();
-  $: console.log(postObjs);
 </script>
 <style>
   div.post-grid {
@@ -44,10 +45,6 @@
 </h1>
 <div class="post-grid">
 {#each postObjs as postObj}
-  <Postcard
-    postid={postObj.postid}
-    title={postObj.title}
-    subtitle={postObj.subtitle}
-    date={postObj.date} />
+  <Postcard postobj={postObj} />
 {/each}
 </div>

@@ -9,9 +9,6 @@
     "/": Home,
     "*": Home,
   };
-  let drywrap = (component) => wrap({
-      asyncComponent: () => import(component)
-    });
 </script>
 <style>
 	main {
@@ -28,17 +25,8 @@
 	}
 </style>
 <div id="navbar">
-  <a class="nav" on:click={() => {
-    push("/posts/hannahismylove");
-  }}>Simon Jones</a>
-  <a class="nav">Posts</a>
-  <a class="nav">Posts</a>
-  <a class="nav">Posts</a>
-  <a class="nav">Posts</a>
-  <a class="nav">Posts</a>
-  <a class="nav">Posts</a>
-  <a class="nav">Posts</a>
-  <a class="nav">Posts</a>
+  <a class="nav" on:click={() => { push("/"); }}>Simon Jones</a>
+  <a class="nav" on:click={() => { push("/posts/") }}>Posts</a>
 </div>
 <div class="container">
 <Router {routes} />
