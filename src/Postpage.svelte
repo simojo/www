@@ -4,9 +4,24 @@
   };
   import {parse} from "./marked.js";
   export let postobj = undefined;
+
+	const options = {
+		displayMode: true,
+		throwOnError: false
+	}
+  // FIXME: not working!!!!
+  import katex from "katex";
+  let katexString = (str) => katex.renderToString(str, options);
   function createHtmlBody(text) {
       console.log(text);
-      return parse(text, {gfm: true, breaks: true, hightlight: true});
+      return [text]
+        .map(x => parse(x, {gfm: true, breaks: true, hightlight: true}))
+        .map(x => {
+          let temp = x;
+          x.match(/(?<=\${1,2}).*?(?=\${1,2})/g)
+            .forEach(y => temp.replace(y, katexString(y)))
+          return temp;
+        });
   }
   async function loadData() {
     await fetch(`https://raw.githubusercontent.com/simojo/www/dev-svelte/posts/${params.postId}.md`)
@@ -22,6 +37,7 @@
   }
   loadData();
 </script>
+
 {#if postobj !== undefined}
   <h1>{postobj.title}</h1>
   {@html postobj.text}
