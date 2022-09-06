@@ -4,13 +4,11 @@
   };
   import {parse} from "./marked.js";
   export let postobj = undefined;
-
-	const options = {
-		displayMode: true,
-		throwOnError: false
-	}
-  // FIXME: not working!!!!
   import katex from "katex";
+  const options = {
+    displayMode: displayMode,
+    	throwOnError: false
+  };
   let katexString = (str) => katex.renderToString(str, options);
   function createHtmlBody(text) {
       console.log(text);
