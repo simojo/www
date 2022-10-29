@@ -20707,7 +20707,7 @@ var app = (function () {
     const { console: console_1$2 } = globals;
     const file$2 = "src/Postpage.svelte";
 
-    // (39:0) {#if postobj !== undefined}
+    // (42:0) {#if postobj !== undefined}
     function create_if_block$2(ctx) {
     	let h1;
     	let t0_value = /*postobj*/ ctx[0].title + "";
@@ -20724,7 +20724,7 @@ var app = (function () {
     			t1 = space();
     			html_tag = new HtmlTag(false);
     			html_anchor = empty();
-    			add_location(h1, file$2, 39, 2, 1212);
+    			add_location(h1, file$2, 42, 2, 1319);
     			html_tag.a = html_anchor;
     		},
     		m: function mount(target, anchor) {
@@ -20750,7 +20750,7 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(39:0) {#if postobj !== undefined}",
+    		source: "(42:0) {#if postobj !== undefined}",
     		ctx
     	});
 
@@ -20811,7 +20811,7 @@ var app = (function () {
     	validate_slots('Postpage', slots, []);
     	let { params = { postId: undefined } } = $$props;
     	let { postobj = undefined } = $$props;
-    	const options = { displayMode, throwOnError: false };
+    	const options = { displayMode: true, throwOnError: false };
     	let katexString = str => katex.renderToString(str, options);
 
     	function createHtmlBody(text) {
@@ -20823,7 +20823,13 @@ var app = (function () {
     			hightlight: true
     		})).map(x => {
     			let temp = x;
-    			x.match(/(?<=\${1,2}).*?(?=\${1,2})/g).forEach(y => temp.replace(y, katexString(y)));
+    			let match = x.match(/(\${2}.+?\${2}|\$.+?\$)/g);
+    			console.log(match);
+
+    			if (match != null) {
+    				match.forEach(y => temp = temp.replace(y, katexString(y.replaceAll("$", ""))));
+    			}
+
     			return temp;
     		});
     	}

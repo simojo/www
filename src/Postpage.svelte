@@ -6,8 +6,8 @@
   export let postobj = undefined;
   import katex from "katex";
   const options = {
-    displayMode: displayMode,
-    	throwOnError: false
+    displayMode: true,
+    throwOnError: false
   };
   let katexString = (str) => katex.renderToString(str, options);
   function createHtmlBody(text) {
@@ -16,8 +16,11 @@
         .map(x => parse(x, {gfm: true, breaks: true, hightlight: true}))
         .map(x => {
           let temp = x;
-          x.match(/(?<=\${1,2}).*?(?=\${1,2})/g)
-            .forEach(y => temp.replace(y, katexString(y)))
+          let match = x.match(/(\${2}.+?\${2}|\$.+?\$)/g);
+          console.log(match);
+          if (match != null) {
+            match.forEach(y => temp = temp.replace(y, katexString(y.replaceAll("$", ""))))
+          }
           return temp;
         });
   }
