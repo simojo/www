@@ -18,7 +18,7 @@
     };
     console.log(ret);
     postObjs = [...postObjs, ret];
-    postObjs = postObjs.sort((a,b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0);
+    postObjs = postObjs.sort((a,b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0));
   }
   async function loadData() {
     let user = "simojo";
