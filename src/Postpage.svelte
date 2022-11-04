@@ -19,7 +19,7 @@
           let match = x.match(/(\${2}.+?\${2}|\$.+?\$)/gm);
           console.log(match);
           if (match != null) {
-            match.forEach(y => temp = temp.replace(y, katexString(y.replaceAll("$", ""))))
+            match.forEach(y => temp = temp.replace(y, katexString(y.replaceAll("$", "").replaceAll("<br>", "\n"))))
           }
           return temp;
         });
