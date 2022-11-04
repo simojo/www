@@ -16,7 +16,7 @@
         .map(x => parse(x, {gfm: true, breaks: true, hightlight: true}))
         .map(x => {
           let temp = x;
-          let match = x.match(/(\${2}.+?\${2}|\$.+?\$)/g);
+          let match = x.match(/(\${2}.+?\${2}|\$.+?\$)/gm);
           console.log(match);
           if (match != null) {
             match.forEach(y => temp = temp.replace(y, katexString(y.replaceAll("$", ""))))
