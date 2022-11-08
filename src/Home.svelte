@@ -1,7 +1,5 @@
 <script>
   import Postcard from "./Postcard.svelte";
-  let postUrls = [];
-  let postTexts = [];
   let postObjs = [];
   async function parseIntoPostObj(s) {
     let text = "";
@@ -16,7 +14,6 @@
       date: text.split("\n")[2].match(/(?<=### ).*/g)[0],
       text: text.split("\n").slice(3),
     };
-    console.log(ret);
     postObjs = [...postObjs, ret];
     postObjs = postObjs.sort((a,b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0));
   }
