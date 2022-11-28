@@ -12,6 +12,7 @@
     const blockRegex = /\$\$[^\$]*\$\$/gm;
     const inlineRegex = /\$[^\$]*\$/g;
     let blockExprArray = text.match(blockRegex);
+    console.log(blockExprArray);
     let inlineExprArray = text.match(inlineRegex);
     for (let i in blockExprArray) {
       const expr = blockExprArray[i];
