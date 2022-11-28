@@ -60,7 +60,7 @@
   function createHtmlBody(text) {
       console.log(text);
       return [text]
-        .map(x => marked.parse(x, {gfm: true, breaks: true, hightlight: true}));
+        .map(x => marked.parse(x, {gfm: true,  hightlight: true}));
         /*
         .map(x => {
           let temp = x;
