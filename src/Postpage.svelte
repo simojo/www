@@ -9,7 +9,7 @@
   const renderer = new marked.Renderer();
   let originParagraph = renderer.paragraph.bind(renderer);
   renderer.paragraph = (text) => {
-    const blockRegex = /\$\$[^\$]*\$\$/g;
+    const blockRegex = /\$\$[^\$]*\$\$/gm;
     const inlineRegex = /\$[^\$]*\$/g;
     let blockExprArray = text.match(blockRegex);
     let inlineExprArray = text.match(inlineRegex);
