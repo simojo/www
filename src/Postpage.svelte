@@ -14,16 +14,15 @@
     let blockExprArray = text.match(blockRegex);
     console.log(blockExprArray);
     let inlineExprArray = text.match(inlineRegex);
+    let parseable = (s) => s.replace("<br>", "\n").replace("&amp;", "&");
     for (let i in blockExprArray) {
       const expr = blockExprArray[i];
-      expr = expr.replace("<br>", "\n").replace("&amp;", "&");
-      const result = renderMathsExpression(expr);
+      const result = renderMathsExpression(parseable(expr));
       text = text.replace(expr, result);
     }
     for (let i in inlineExprArray) {
       const expr = inlineExprArray[i];
-      expr = expr.replace("<br>", "\n").replace("&amp;", "&");
-      const result = renderMathsExpression(expr);
+      const result = renderMathsExpression(parseable(expr));
       text = text.replace(expr, result);
     }
     return originParagraph(text);
