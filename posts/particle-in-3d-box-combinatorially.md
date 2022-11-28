@@ -10,7 +10,7 @@ $$
 V(x,y,z)=
 \left\\{
 \begin{array}{cl}
-0, & x,y,z\ \text{all between 0 and}\ a\text{;} \newline
+0, & x,y,z\ \text{all between 0 and}\ a\text{;} \\
 \infty, & \text{otherwise.}
 \end{array}\right\\}
 $$
