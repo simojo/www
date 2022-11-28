@@ -16,11 +16,13 @@
     let inlineExprArray = text.match(inlineRegex);
     for (let i in blockExprArray) {
       const expr = blockExprArray[i];
+      expr = expr.replace("<br>", "\n").replace("&amp;", "&");
       const result = renderMathsExpression(expr);
       text = text.replace(expr, result);
     }
     for (let i in inlineExprArray) {
       const expr = inlineExprArray[i];
+      expr = expr.replace("<br>", "\n").replace("&amp;", "&");
       const result = renderMathsExpression(expr);
       text = text.replace(expr, result);
     }
