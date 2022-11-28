@@ -12,9 +12,8 @@
     const blockRegex = /\$\$[^\$]*\$\$/gm;
     const inlineRegex = /\$[^\$]*\$/g;
     let blockExprArray = text.match(blockRegex);
-    console.log(blockExprArray);
     let inlineExprArray = text.match(inlineRegex);
-    let parseable = (s) => s.replace("<br>", "\n").replace("&amp;", "&");
+    let parseable = (s) => s.replaceAll("<br>", "\n").replaceAll("&amp;", "&");
     for (let i in blockExprArray) {
       const expr = blockExprArray[i];
       const result = renderMathsExpression(parseable(expr));
