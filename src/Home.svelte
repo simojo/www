@@ -9,9 +9,9 @@
       .catch(x => console.error(x));
     let ret = {
       postid: s.name.match(/.*(?=\.md)/g)[0],
-      title: text.split("\n")[0].match(/(?<=# ).*/g)[0],
-      subtitle: text.split("\n")[1].match(/(?<=## ).*/g)[0],
-      date: text.split("\n")[2].match(/(?<=### ).*/g)[0],
+      title: x.split("\n")[0].match(/^# .*/g)[0].substring(2),
+      subtitle: x.split("\n")[1].match(/^## .*/g)[0].substring(3),
+      date: x.split("\n")[2].match(/^### .*/g)[0].substring(4),
       text: text.split("\n").slice(3),
     };
     postObjs = [...postObjs, ret];
