@@ -78,9 +78,9 @@
       .then(x => x.text())
       .then(x => postobj = {
           postid: params.postId,
-          title: x.split("\n")[0].match(/(?<=# ).*/g)[0],
-          subtitle: x.split("\n")[1].match(/(?<=## ).*/g)[0],
-          date: x.split("\n")[2].match(/(?<=### ).*/g)[0],
+          title: x.split("\n")[0].match(/^# .*/g)[0].substring(2),
+          subtitle: x.split("\n")[1].match(/^## .*/g)[0].substring(3),
+          date: x.split("\n")[2].match(/^### .*/g)[0].substring(4),
           text: createHtmlBody(x.split("\n").slice(3).reduce((i, a) => i + "\n" + a)),
         }
       )
