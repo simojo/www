@@ -36,7 +36,7 @@ $$
 E=-\frac{\hbar^2}{2m}\left(\frac{X''}{X}+\frac{Y''}{Y}+\frac{Z''}{Z}\right)
 $$
 
-Now we just need to solve the differential equation $f''=fX \xrightarrow \frac{f''}{f}=A$.
+Now we just need to solve the differential equation $f''=fX \Rightarrow \frac{f''}{f}=A$.
 
 This yields three independent solutions, $\psi_x, \psi_y,\ \text{and}\  \psi_z$, which happen to be 
 
