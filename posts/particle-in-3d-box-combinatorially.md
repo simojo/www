@@ -61,6 +61,6 @@ Alright, here is where we apply our clever trick. The allowed energies for the g
 $$
 E=\frac{\pi^2\hbar^2}{2ma^2}\left(n_x^2+n_y^2+_z^2\right)\ \ (n_x,n_y,n_z\in \mathbb{Z}^+).
 $$
-Rather than plugging in different combinations for each integer $n_x,n_y,n_z$, mathematics gives us a tool called $generating functions$ that help us out.
+Rather than plugging in different combinations for each integer $n_x,n_y,n_z$, mathematics gives us a tool called *generating functions* that help us out.
 
 $$f(x)=\sum_{i=1}^\infty x^{i^2}+\sum_{i=1}^\infty x^{i^2} + \sum_{i=1}^\infty x^{i^2}$$
