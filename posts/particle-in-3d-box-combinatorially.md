@@ -40,11 +40,13 @@ Now we just need to solve the differential equation $f''=AF \Rightarrow \frac{f'
 
 This yields the three independent solutions,
 $$
-\begin{array}{lr}
-X(x)=\frac{2}{a}\sin\left(\frac{n_x \pi x}{a}\right) & (n_x \in \mathbb{Z}^+) \\
-Y(x)=\frac{2}{a}\sin\left(\frac{n_y \pi y}{a}\right) & (n_y \in \mathbb{Z}^+) \\
-Z(x)=\frac{2}{a}\sin\left(\frac{n_z \pi z}{a}\right) & (n_z \in \mathbb{Z}^+). \\
-\end{array}
+X(x)=\frac{2}{a}\sin\left(\frac{n_x \pi x}{a}\right) & (n_x \in \mathbb{Z}^+),
+$$
+$$
+Y(x)=\frac{2}{a}\sin\left(\frac{n_y \pi y}{a}\right) & (n_y \in \mathbb{Z}^+),
+$$
+$$
+Z(x)=\frac{2}{a}\sin\left(\frac{n_z \pi z}{a}\right) & (n_z \in \mathbb{Z}^+).
 $$
 
 Now we know $\psi=\left(\frac{2}{a}\right)^{\frac{3}{2}}\sin\left(\frac{n_x \pi x}{a}\right)\sin\left(\frac{n_y \pi y}{a}\right)\sin\left(\frac{n_z \pi z}{a}\right)$. If we put this back into our hamiltonian, we will have our allowed energies:
