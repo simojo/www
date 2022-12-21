@@ -17,7 +17,7 @@
       .replaceAll("<br>", "\n")
       .replaceAll("&amp;", "&")
       .replaceAll("\\\n","\\\\\n")
-      .replaceAll("&#39", "\'");
+      .replaceAll("&#39;", "\'");
     for (let i in blockExprArray) {
       const expr = blockExprArray[i];
       const result = renderMathsExpression(parseable(expr));

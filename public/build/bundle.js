@@ -20724,7 +20724,7 @@ var app = (function () {
     			t1 = space();
     			html_tag = new HtmlTag(false);
     			html_anchor = empty();
-    			add_location(h1, file$2, 95, 2, 3155);
+    			add_location(h1, file$2, 95, 2, 3156);
     			html_tag.a = html_anchor;
     		},
     		m: function mount(target, anchor) {
@@ -20822,7 +20822,7 @@ var app = (function () {
     		const inlineRegex = /\$[^\$]*\$/g;
     		let blockExprArray = text.match(blockRegex);
     		let inlineExprArray = text.match(inlineRegex);
-    		let parseable = s => s.replaceAll("<br>", "\n").replaceAll("&amp;", "&").replaceAll("\\\n", "\\\\\n").replaceAll("&#39", "\'");
+    		let parseable = s => s.replaceAll("<br>", "\n").replaceAll("&amp;", "&").replaceAll("\\\n", "\\\\\n").replaceAll("&#39;", "\'");
 
     		for (let i in blockExprArray) {
     			const expr = blockExprArray[i];
