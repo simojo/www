@@ -40,13 +40,13 @@ Now we just need to solve the differential equation $f''=AF \Rightarrow \frac{f'
 
 This yields the three independent solutions,
 $$
-X(x)=\frac{2}{a}\sin\left(\frac{n_x \pi x}{a}\right) & (n_x \in \mathbb{Z}^+),
+X(x)=\frac{2}{a}\sin\left(\frac{n_x \pi x}{a}\right),\ \ (n_x \in \mathbb{Z}^+),
 $$
 $$
-Y(x)=\frac{2}{a}\sin\left(\frac{n_y \pi y}{a}\right) & (n_y \in \mathbb{Z}^+),
+Y(x)=\frac{2}{a}\sin\left(\frac{n_y \pi y}{a}\right),\ \ (n_y \in \mathbb{Z}^+),
 $$
 $$
-Z(x)=\frac{2}{a}\sin\left(\frac{n_z \pi z}{a}\right) & (n_z \in \mathbb{Z}^+).
+Z(x)=\frac{2}{a}\sin\left(\frac{n_z \pi z}{a}\right),\ \ (n_z \in \mathbb{Z}^+).
 $$
 
 Now we know $\psi=\left(\frac{2}{a}\right)^{\frac{3}{2}}\sin\left(\frac{n_x \pi x}{a}\right)\sin\left(\frac{n_y \pi y}{a}\right)\sin\left(\frac{n_z \pi z}{a}\right)$. If we put this back into our hamiltonian, we will have our allowed energies:
@@ -61,7 +61,7 @@ Now, how do we find all possible combinations of integers for these energies in 
 
 Alright, here is where we apply our clever trick. The allowed energies for the given conditions are
 $$
-E=\frac{\pi^2\hbar^2}{2ma^2}\left(n_x^2+n_y^2+_z^2\right)\ \ (n_x,n_y,n_z\in \mathbb{Z}^+).
+E=\frac{\pi^2\hbar^2}{2ma^2}\left(n_x^2+n_y^2+_z^2\right),\ \ (n_x,n_y,n_z\in \mathbb{Z}^+).
 $$
 Rather than plugging in different combinations for each integer $n_x,n_y,n_z$, mathematics gives us a tool called *generating functions* that help us out.
 
