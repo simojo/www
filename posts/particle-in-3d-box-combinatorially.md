@@ -15,6 +15,12 @@ V(x,y,z)=
 \end{array}\right\\}
 $$
 
+So our hamiltonian will look like this,
+
+$$
+\mathcal{H}=-\frac{\hbar^2}{2m}\left(\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial z^2} \right)+V(x,y,z).
+$$
+
 This yields three independent solutions, $\psi_x, \psi_y,\ \text{and}\  \psi_z$, which happen to be 
 
 $$f(x)=\sum_{i=1}^\infty x^{i^2}+\sum_{i=1}^\infty x^{i^2} + \sum_{i=1}^\infty x^{i^2}$$

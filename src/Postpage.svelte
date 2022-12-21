@@ -13,7 +13,7 @@
     const inlineRegex = /\$[^\$]*\$/g;
     let blockExprArray = text.match(blockRegex);
     let inlineExprArray = text.match(inlineRegex);
-    let parseable = (s) => s.replaceAll("<br>", "\n").replaceAll("&amp;", "&");
+    let parseable = (s) => s.replaceAll("<br>", "\n").replaceAll("&amp;", "&").replaceAll("\\\n","\\\\\n");
     for (let i in blockExprArray) {
       const expr = blockExprArray[i];
       const result = renderMathsExpression(parseable(expr));
@@ -37,7 +37,7 @@
       }
       let html = null;
       try {
-        html = katex.renderToString(expr);
+        html = katex.renderToString(expr, {displayMode: displayStyle});
       } catch (e) {
         console.error(e);
       }
