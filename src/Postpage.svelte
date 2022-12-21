@@ -13,7 +13,11 @@
     const inlineRegex = /\$[^\$]*\$/g;
     let blockExprArray = text.match(blockRegex);
     let inlineExprArray = text.match(inlineRegex);
-    let parseable = (s) => s.replaceAll("<br>", "\n").replaceAll("&amp;", "&").replaceAll("\\\n","\\\\\n");
+    let parseable = (s) => s
+      .replaceAll("<br>", "\n")
+      .replaceAll("&amp;", "&")
+      .replaceAll("\\\n","\\\\\n")
+      .replaceAll("&#39", "\'");
     for (let i in blockExprArray) {
       const expr = blockExprArray[i];
       const result = renderMathsExpression(parseable(expr));

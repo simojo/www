@@ -20707,7 +20707,7 @@ var app = (function () {
     const { console: console_1$2 } = globals;
     const file$2 = "src/Postpage.svelte";
 
-    // (91:0) {#if postobj !== undefined}
+    // (95:0) {#if postobj !== undefined}
     function create_if_block$2(ctx) {
     	let h1;
     	let t0_value = /*postobj*/ ctx[0].title + "";
@@ -20724,7 +20724,7 @@ var app = (function () {
     			t1 = space();
     			html_tag = new HtmlTag(false);
     			html_anchor = empty();
-    			add_location(h1, file$2, 91, 2, 3102);
+    			add_location(h1, file$2, 95, 2, 3155);
     			html_tag.a = html_anchor;
     		},
     		m: function mount(target, anchor) {
@@ -20750,7 +20750,7 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(91:0) {#if postobj !== undefined}",
+    		source: "(95:0) {#if postobj !== undefined}",
     		ctx
     	});
 
@@ -20822,7 +20822,7 @@ var app = (function () {
     		const inlineRegex = /\$[^\$]*\$/g;
     		let blockExprArray = text.match(blockRegex);
     		let inlineExprArray = text.match(inlineRegex);
-    		let parseable = s => s.replaceAll("<br>", "\n").replaceAll("&amp;", "&").replaceAll("\\\n", "\\\\\n");
+    		let parseable = s => s.replaceAll("<br>", "\n").replaceAll("&amp;", "&").replaceAll("\\\n", "\\\\\n").replaceAll("&#39", "\'");
 
     		for (let i in blockExprArray) {
     			const expr = blockExprArray[i];
