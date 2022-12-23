@@ -26,6 +26,7 @@ $$
 $$
 
 So, in order to find the energies, we'll look for a function $\psi(x,y,z)=X(x)Y(y)Z(z)$, as a product of the wave function for each dimenson. Observe,
+
 $$
 E\psi=\mathcal{H}\psi
 $$
@@ -39,6 +40,7 @@ $$
 Now we just need to solve the differential equation $f''=Af \Rightarrow \frac{f''}{f}=A$ with the boundary conditions $f(0)=f(a)=0$.
 
 This yields the three independent solutions,
+
 $$
 X(x)=\frac{2}{a}\sin\left(\frac{n_x \pi x}{a}\right),\ \ (n_x \in \mathbb{Z}^+),
 $$
@@ -66,9 +68,11 @@ Now, how do we find all possible combinations of integers for these energies in 
 ### Applying the combinatorics
 
 Alright, here is where we apply our clever trick. The allowed energies for the given conditions are
+
 $$
 E=E_0\left(n_x^2+n_y^2+n_z^2\right)\ \ (n_x,n_y,n_z\in \mathbb{Z}^+).
 $$
+
 Rather than plugging in different combinations for each integer $n_x,n_y,n_z$, mathematics gives us a tool called a *generating function* that helps us out. Generating functions are special functions that we create so that the coefficients of each term tells us something, whether it be a finding a recurrence relation, finding combinations of integers, or getting binomial expansions.
 
 In our case, we have three integer *choices*, if you will. Each choice can range from $1$ to $\infty$, just like the quantum number for a particle in a 1 dimensional box. Consider the following generating function,
