@@ -27,6 +27,7 @@
 <div id="navbar">
   <a class="nav" on:click={() => { push("/"); }}>Simon Jones</a>
   <a class="nav" on:click={() => { push("/posts/") }}>Posts</a>
+  <a class="nav" on:click={() => { push("/faith/") }}>{@html "&#10014;"}</a>
 </div>
 <div class="container">
 <Router {routes} />
