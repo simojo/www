@@ -29,7 +29,7 @@
 <div id="navbar">
   <a class="nav" on:click={() => { push("/"); }}>Simon Jones</a>
   <a class="nav" on:click={() => { push("/posts/") }}>Posts</a>
-<a class="nav" on:click={() => { push("/faith/") }}><span style="font-size: 1.5em;">{@html "&#10014;"}</span></a>
+<a class="nav" on:click={() => { push("/faith/") }}>{@html "&#10014;"} Faith</a>
 </div>
 <div class="container">
 <Router {routes} />
