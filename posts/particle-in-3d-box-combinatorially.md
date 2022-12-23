@@ -84,15 +84,15 @@ $$
 Expanding this will result in some infinite sequence $a_1\cdot x^{n_1}+a_2\cdot x^{n_2}+a_3\cdot x^{n_3}\dots$. What if we try to look at one term in the expansion of $f$? Let's pick the term with $x^{10}$. We know it exists, but what would its coefficient be? In other words, we're asking, "How many ways are there to get $x^10$ by multiplying out these two polynomials?" Further, "How many ways can we add up to $10$ by picking any two numbers less than or equal to $10$?" Now we have boiled down a question of combining a function into a question of combinations of numbers. After expanding this polynomial out, we see that
 
 $$
-f(x)=1+2x+3x^2+4x^3+5x^4+6x^5+7x^6+8x^7+9x^8+10x^9+11x^10+\dots.
+f(x)=1+2x+3x^2+4x^3+5x^4+6x^5+7x^6+8x^7+9x^8+10x^9+11x^{10}+\dots.
 $$
 
-Now we know that there are 11 ways to get $x^10$ (hence, a coefficient of $11$) in our expression. Thus, there are $11$ ways to add up to ten from picking two numbers less than or equal to $10$.
+Now we know that there are 11 ways to get $x^{10}$ (hence, a coefficient of $11$) in our expression. Thus, there are $11$ ways to add up to ten from picking two numbers less than or equal to $10$.
 
 This is great, but we're not counting by $0,1,2,3,\dots$ in our problem. We're counting instead by $1^2,2^2,3^3,\dots$. Easy. We change the exponents of the numbers to be the squares of the integers, and we cube the entire expression, because we're choosing three integers:
 
 $$
-f(x)=(x^1+x^2+x^3\dots)^3=\left(\sum_{i=1}^\infty x^{i^2}\right)^3
+f(x)=(x^1^2+x^2^2+x^3^2\dots)^3=\left(\sum_{i=1}^\infty x^{i^2}\right)^3
 $$
 
 Unfortunately, we can really only expand this computationally. Expanding this using my calculator, I find that
