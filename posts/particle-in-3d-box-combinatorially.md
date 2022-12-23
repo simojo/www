@@ -84,7 +84,10 @@ $$
 Expanding this will result in some infinite sequence $a_1\cdot x^{n_1}+a_2\cdot x^{n_2}+a_3\cdot x^{n_3}\dots$. What if we try to look at one term in the expansion of $f$? Let's pick the term with $x^{10}$. We know it exists, but what would its coefficient be? In other words, we're asking, "How many ways are there to get $x^{10}$ by multiplying out these two polynomials?" Further, "How many ways can we add up to $10$ by picking any two numbers less than or equal to $10$?" Now we have boiled down a question of combining a function into a question of combinations of numbers. After expanding this polynomial out, we see that
 
 $$
-f(x)=1+2x+3x^2+4x^3+5x^4+6x^5+7x^6+8x^7+9x^8+10x^9+11x^{10}+\dots.
+\begin{array}{rl}
+f(x) & =1+2x+3x^2+4x^3+5x^4+6x^5+7x^6 \\
+& +8x^7+9x^8+10x^9+11x^{10}+\dots.
+\end{array}
 $$
 
 Now we know that there are 11 ways to get $x^{10}$ (hence, a coefficient of $11$) in our expression. Thus, there are $11$ ways to add up to ten from picking two numbers less than or equal to $10$.
