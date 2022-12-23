@@ -67,6 +67,7 @@ html, body {
   font-size: 1.2rem;
   display: flex;
   align-items: center;
+  overflow-x: auto;
 }
 
 body {
