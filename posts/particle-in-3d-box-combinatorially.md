@@ -97,7 +97,7 @@ Each exponent is what our three choices sum to, while the coefficient in front i
 
 $$
 \begin{array}{c|c}
-E & \text{Degeneracy}
+E & \text{Degeneracy} \\
 \hline
 3E_0 & 1 \\
 6E_0 & 3 \\
