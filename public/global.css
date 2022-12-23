@@ -61,12 +61,10 @@ html, body {
   height: 2rem;
   background-color: var(--bg);
   border-bottom: 1px solid var(--bg1);
-  width: 100vw;
   font-family: Roboto Mono;
   color: var(--fg1);
   font-size: 1.2rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
