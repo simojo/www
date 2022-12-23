@@ -60,6 +60,8 @@ html, body {
   top: 0;
   height: 2rem;
   background-color: var(--bg);
+  width: 100vw;
+  overflow-x: auto;
   border-bottom: 1px solid var(--bg1);
   font-family: Roboto Mono;
   color: var(--fg1);
@@ -117,6 +119,7 @@ a.nav {
 	border-right: 1px solid var(--bg1);
 	text-align: center;
 	box-sizing: border-box;
+	white-space: nowrap;
 }
 
 a:visited {
