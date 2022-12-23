@@ -4,8 +4,10 @@
   import {wrap} from "svelte-spa-router/wrap";
   import Home from './Home.svelte';
   import Postpage from './Postpage.svelte';
+  import Faith from './Faith.svelte';
   let routes = {
     "/posts/:postId": Postpage,
+    "/faith/": Faith,
     "/": Home,
     "*": Home,
   };
@@ -27,7 +29,7 @@
 <div id="navbar">
   <a class="nav" on:click={() => { push("/"); }}>Simon Jones</a>
   <a class="nav" on:click={() => { push("/posts/") }}>Posts</a>
-  <a class="nav" on:click={() => { push("/faith/") }}>{@html "&#10014;"}</a>
+<a class="nav" on:click={() => { push("/faith/") }}><span style="font-size: 1.5em;">{@html "&#10014;"}</span></a>
 </div>
 <div class="container">
 <Router {routes} />
