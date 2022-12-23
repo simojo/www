@@ -85,7 +85,7 @@ Expanding this will result in some infinite sequence $a_1\cdot x^{n_1}+a_2\cdot 
 
 $$
 \begin{array}{rl}
-f(x) & =1+2x+3x^2+4x^3+5x^4+6x^5+7x^6 \\
+f(x)= & 1+2x+3x^2+4x^3+5x^4+6x^5+7x^6 \\
 & +8x^7+9x^8+10x^9+11x^{10}+\dots.
 \end{array}
 $$
