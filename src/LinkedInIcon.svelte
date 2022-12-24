@@ -1,4 +1,4 @@
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem"
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" height="1.4rem" width="1.4rem"
 	 viewBox="0 0 504.4 504.4" style="enable-background:new 0 0 504.4 504.4; fill: var(--fg1);">
 <g>
 	<g>
