@@ -8,4 +8,7 @@ The closed captioning processing is *comically* weak (pun intended), but it stil
 
 <img src="https://raw.githubusercontent.com/simojo/comtube/master/demos/comic1/0.png" title="Title page automatically generated from running the program. The YouTube video ID is used as the title." style="width: 100%;" />
 
+
+<img src="https://raw.githubusercontent.com/simojo/comtube/master/demos/comic1/1.png" title="First page of comic book." style="width: 100%;" />
+
 `comtube`'s demonstration and source code can be found [here](https://github.com/simojo/comtube).
