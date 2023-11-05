@@ -6,6 +6,6 @@ Being a frequent user of YouTube, I created a program to turn YouTube videos int
 
 The closed captioning processing is *comically* weak (pun intended), but it still grabs contextual tidbits of sentences and hacks it into a sentence using language tokenization. I also tried to implement my own posterizing algorithm, but it produces an overly green/yellow/brown/red image each time; still posterized, but not properly. Given that the posterization algorithm was implemented as an afterthought, I'm not too concerned. I got the project done in roughly 30 days. Now that I've done some other extracirricular work with image processing, however, if I were faced with the prospect another time, I would most certainly do it the right way.
 
-![Titlepage automatically generated from running the program. The YouTube video ID is used as the title.](https://raw.githubusercontent.com/simojo/comtube/master/demos/comic1/0.png)
+<img src="https://raw.githubusercontent.com/simojo/comtube/master/demos/comic1/0.png" title="Titlepage automatically generated from running the program. The YouTube video ID is used as the title." style="width: 100%;" />
 
 `comtube`'s demonstration and source code can be found [here](https://github.com/simojo/comtube).
