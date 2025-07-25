@@ -2,12 +2,13 @@
 ## Let's make a simple nix flake that builds a project and installs it.
 ### 2025-07-25
 
-Nix flakes is an experimental feature of the Nix package manager [0]. As opposed
-to standard nix files, flakes allow for a self-contained, reproducible output
-thanks to the `flake.lock` file, which locks dependencies in-place. Previously,
-with nix derivations or shells, pinning packages required one to manually
-specify how the package is to be downloaded using a fetcher. Nix flakes
-simplifies this process, making it more ergonomic on the user's end.
+Nix flakes is an experimental feature of the Nix package manager
+[(docs)](nix-flakes). As opposed to standard nix files, flakes allow for a
+self-contained, reproducible output thanks to the `flake.lock` file, which locks
+dependencies in-place. Previously, with nix derivations or shells, pinning
+packages required one to manually specify how the package is to be downloaded
+using a fetcher. Nix flakes simplifies this process, making it more ergonomic on
+the user's end.
 
 > Disclaimer: I am not an expert. I am trying to document my knowledge of Nix to
 > formalize my understanding of it. I enjoy learning, so reach out if there's
@@ -16,7 +17,7 @@ simplifies this process, making it more ergonomic on the user's end.
 #### Before starting
 
 Because Nix flakes is experimental, you won't find it usable with a fresh
-install of Nix (at least currently). From the wiki, you'll need tell `nix` you
+install of Nix (at least currently). From [the wiki](nix-flakes), you'll need tell `nix` you
 want experimental features:
 
 > When using any `nix` command, add the following command-line options:
@@ -127,4 +128,4 @@ become even more useful: compiling from source without downloading the toolchain
 to you local environment. In this section, we'll leverage more of Nix's
 derivation mechanics, which tend to be confusing. -->
 
-[0](https://nixos.wiki/wiki/flakes)
+[nix-flakes]: https://nixos.wiki/wiki/flakes
