@@ -3,7 +3,7 @@
 ### 2025-07-25
 
 Nix flakes is an experimental feature of the Nix package manager
-[(docs)](nix-flakes). As opposed to standard `nix` files, flakes allow for a
+[(docs)](https://nixos.wiki/wiki/flakes). As opposed to standard `nix` files, flakes allow for a
 self-contained, reproducible output thanks to the `flake.lock` file, which locks
 dependencies in-place. Previously, with Nix derivations or shells, pinning
 packages required one to manually specify how the package is to be downloaded
@@ -17,7 +17,7 @@ the user's end.
 #### Before starting
 
 Because Nix flakes is experimental, you won't find it usable with a fresh
-install of Nix (at least currently). From [the wiki](nix-flakes), you'll need tell `nix` you
+install of Nix (at least currently). From [the wiki](https://nixos.wiki/wiki/flakes), you'll need tell `nix` you
 want experimental features:
 
 > When using any `nix` command, add the following command-line options:
@@ -363,5 +363,3 @@ we created in `flake.nix`. As you can imagine, more complex patterns exist and
 can be leveraged, but this shows us how we can create a Nix flake that compiles
 and installs a C program in a self-contained way, even if we don't have `gcc`
 installed in our environment.
-
-[nix-flakes]: https://nixos.wiki/wiki/flakes
