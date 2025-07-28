@@ -14,7 +14,7 @@ the user's end.
 > formalize my understanding of it. I enjoy learning, so reach out if there's
 > more to the story that I'm missing.
 
-#### Before starting
+## Before starting
 
 Because Nix flakes is experimental, you won't find it usable with a fresh
 install of Nix (at least currently). From [the wiki](https://nixos.wiki/wiki/flakes), you'll need tell `nix` you
@@ -26,7 +26,7 @@ want experimental features:
  --experimental-features 'nix-command flakes'
 ```
 
-#### Flake that writes to a file
+## Flake that writes to a file
 
 A nix flake is made of four basic parts: a `description`, `inputs`, `outputs`,
 and `nixConfig`. For our purposes, however, let's focus on the two most simple
@@ -61,7 +61,7 @@ Intel). To find our your system type, you can run `nix -vv --version`.
 
 Let's give `nix build` what it wants. We'll add `nixpkgs` to the `inputs` of our
 flake. This will automatically pass it to `outputs` as an argument. Because
-outputs is currently defined as
+`outputs` is currently defined as:
 
 ```nix
 {
@@ -69,7 +69,7 @@ outputs is currently defined as
 }
 ```
 
-We will need to modify the function signature to accept `nixpkgs` as an
+we will need to modify the function signature to accept `nixpkgs` as an
 argument. Because `nixpkgs` is just a flake input, it needs to be imported so we
 can access its attributes. Additionally, when we import it, we tell it which
 system its being imported on.
@@ -121,7 +121,7 @@ Yay, we wrote text to a file!
 So we did it: we created a minimal working flake that tells Nix "hey, create this
 derivation when I build this flake!"
 
-#### Flake that builds a C program
+## Flake that builds a C program
 
 Now that we've established the fundamentals, we can begin to see how flakes can
 become even more useful: compiling from source without downloading the tool
@@ -133,7 +133,7 @@ Previously, our flake's default package was the derivation
 `/nix/store`. Now, we'll use `pkgs.stdenv.mkDerivation` to make a derivation
 from scratch.
 
-#### The derivation
+### The derivation
 
 We'll have our derivation build and install a simple C program:
 
@@ -148,15 +148,16 @@ int main() {
 }
 ```
 
-This would normally be built by running `gcc main.c -o hello` and installed by
-copying `hello` to some directory on the PATH. In other words, we only need
-**1**: the source code, **2**: `gcc`, and **3**: a binary destination to
-effectively do what we're trying to do.
+This would normally be compiled by running `gcc main.c -o hello` and installed by
+copying `hello` to some directory on the PATH. Effectively, we just need **1**:
+the source code, **2**: `gcc`, and **3**: a binary destination path.
 
-The function `pkgs.stdenv.mkDerivation` has the following inputs, of which we'll
-use `name`, `pname`, `src`, `buildInputs`, `buildPhase`, and `installPhase`:
+The function `pkgs.stdenv.mkDerivation` has the following inputs, (of which we'll
+use `name`, `pname`, `src`, `buildInputs`, `buildPhase`, and `installPhase`):
 
 ```
+# mkDerivation inputs (credit: https://blog.ielliott.io/nix-docs/mkDerivation.html)
+
 {
   # Core Attributes
   name: string
@@ -186,11 +187,11 @@ use `name`, `pname`, `src`, `buildInputs`, `buildPhase`, and `installPhase`:
 - `installPhase` is how the output of `buildPhase` is to be handled and
   installed to the store.
 
-#### Putting it into the flake
+### Putting it into the flake
 
 Rather than supplying a physical source destination, let's use
-`pkgs.writeTextFile` again to make a derivation that the source file under it,
-which we can reference:
+`pkgs.writeTextFile` again to make a derivation that produces a text file, which
+we can reference:
 
 ```nix
 # flake.nix
@@ -246,8 +247,8 @@ its root directory. Hence, we can reference `main.c` directly.
 ```
 
 We're still technically in the root directory of the `hello-world-src`
-derivation. Derivations allow for an `$out` variable that references the `out`
-directory of that derivation. Placing the executable in `$out/bin` automatically
+derivation. Derivations allow for an `out` variable that references the `out`
+directory of that derivation. Placing the executable in `out/bin` automatically
 makes it executable if the derivation were to be part of our environment.
 
 ```nix
@@ -304,7 +305,7 @@ Finally, our flake is ready to be invoked:
 }
 ```
 
-#### Building and running the flake
+### Building and running the flake
 
 Now if we run `nix build` in the same directory as `flake.nix`, a `result` file
 is produced, which points to our derivation's output in `/nix/store`.
@@ -318,7 +319,7 @@ result -> /nix/store/5g0yq85b2kg8r04bk1g6579lkh1ilvn4-hello-world
 ```
 
 We can run our `hello-world` executable, which, if we remember, was placed under
-`$out/bin`:
+`out/bin`:
 
 ```sh
 $ ./result/bin/hello-world
@@ -326,13 +327,13 @@ $ ./result/bin/hello-world
 Hello, world!
 ```
 
-#### Inspecting the flake
+### Inspecting the flake
 
 Using `nix derivation show`, we can inspect the locations of the
 `hello-world-src` and `hello-world` in `/nix/store`.
 
 ```sh
-$ nix derivation show | rg "(hello-world|hello-world-src)"
+$ nix derivation show | rg "(hello-world-src|hello-world)"
 
   "/nix/store/0fspq9j4r29d5y2i2d0qgac408zb4a3w-hello-world.drv": {
       "out": "/nix/store/5g0yq85b2kg8r04bk1g6579lkh1ilvn4-hello-world",
@@ -362,4 +363,10 @@ As we can see, the structure of both directories in `/nix/store` reflects what
 we created in `flake.nix`. As you can imagine, more complex patterns exist and
 can be leveraged, but this shows us how we can create a Nix flake that compiles
 and installs a C program in a self-contained way, even if we don't have `gcc`
-installed in our environment.
+installed in our environment. Logical next-steps would be either to try to
+import this flake into a *another* flake or add a development shell to the
+flake.
+
+I hope this mini-tutorial was helpful and enlightening. I certainly learned in
+creating it. Hopefully, for the non-Nix users, it provided some insight into
+why Nix is helpful for developing reproducible software.
