@@ -1,6 +1,8 @@
-# Starting my PhD
-## Reflections
-### 2024-08-22
+---
+title: Starting my PhD
+description: Reflections
+date: 2024-08-22
+---
 
 This week marks the first week of me starting my PhD at CU Boulder. I've met
 hundreds of extremely qualified, unique people that I can't even begin to

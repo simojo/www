@@ -1,6 +1,8 @@
-# Creating a Simple Nix Flake
-## Let's make a simple Nix flake that builds a project and installs it.
-### 2025-07-25
+---
+title: Creating a Simple Nix Flake
+description: Let's make a simple Nix flake that builds a project and installs it.
+date: 2025-07-25
+---
 
 Nix flakes is an experimental feature of the Nix package manager
 [(docs)](https://nixos.wiki/wiki/flakes). As opposed to standard `nix` files, flakes allow for a

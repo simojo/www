@@ -1,6 +1,8 @@
-# Some beginner's notes on VHDL
-## 
-### 2023-02-27
+---
+title: Some beginner's notes on VHDL
+description: 
+date: 2023-02-27
+---
 
 # Using `VHDL`
 

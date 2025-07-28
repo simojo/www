@@ -1,6 +1,8 @@
-# Finding the energies of a particle in a 3d box combinatorially
-## Here I show that we can use a generating function to solve for the energy states for the classic quantum mechanics problem of a particle in a 3d box.
-### 2022-11-02
+---
+title: Finding the energies of a particle in a 3d box combinatorially
+description: Here I show that we can use a generating function to solve for the energy states for the classic quantum mechanics problem of a particle in a 3d box.
+date: 2022-11-02
+---
 
 While working on a problem in one of my classes *(Griffiths, Quantum Mechanics, 3rd Ed. p4.2)*, I realized that the solution was a direct application of a part of combinatorics: generating functions. The problem goes as follows:
 

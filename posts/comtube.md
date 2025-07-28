@@ -1,6 +1,8 @@
-# comtube
-## Python module that Converts YouTube videos into comic books
-### 2020-11-24
+---
+title: comtube
+description: Python module that Converts YouTube videos into comic books
+date: 2020-11-24
+---
 
 Being a frequent user of YouTube, I created a program to turn YouTube videos into a comic books for my CMPSC 100 course project. It's implemented in python and uses a couple of libraries to get things such as the video title, closed captioning, and to work with images and videos. In order to make the generated comic books look natural, the width of images is randomly assigned, to give each frame a dynamic, artistic feeling that one would witness in a real comic book. The height of each image, however, is the same. That said, by changing a single value, you could have as many as $n$ number of comic strips per page; I just found three rows to be the optimal number.
 
