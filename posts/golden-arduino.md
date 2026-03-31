@@ -116,12 +116,34 @@ a table showcasing my overall improved metrics. I'm especially proud that I
 reduced the near field emissions by 77% compared to the commercial Arduino I
 measured.
 
-| **Metric** | **Golden Arduino** | **Commercial Arduino** | **Comparison** |
-| :--- | :---: | :---: | :--- |
-| **Slammer circuit 5V switching noise** | `623mV` | `563mV` | **+11%** |
-| **Slammer circuit quiet high switching noise** | `603mV` | `543mV` | **+11%** |
-| **Quiet Low Switching Noise Vpp (Falling)** | `563mV` | `1327mV` | **-58%** |
-| **Quiet High Switching Noise Vpp (Falling)** | `382mV` | `523mV` | **-27%** |
-| **Quiet Low Switching Noise Vpp (Rising)** | `281mV` | `382mV` | **-26%** |
-| **Quiet High Switching Noise Vpp (Rising)** | `361mV` | `582mV` | **-38%** |
-| **Near field Vpp** | `26mV` | `111mV` | **-77%** |
+```
++--------------------------------------------------------+
+|       Metric       | Golden  | Commercial | Comparison |
+|                    | Arduino |  Arduino   |            |
+|--------------------|---------|------------|------------|
+| Slammer circuit 5V | 623mV   | 563mV      | +11%       |
+| switching noise    |         |            |            |
+|--------------------|---------|------------|------------|
+| Slammer circuit    | 603mV   | 543mV      | +11%       |
+| quiet high         |         |            |            |
+| switching noise    |         |            |            |
+|--------------------|---------|------------|------------|
+| Quiet Low          | 563mV   |  1327mV    | -58%       |
+| Switching Noise    |         |            |            |
+| Vpp (Falling)      |         |            |            |
+|--------------------|---------|------------|------------|
+| Quiet High         | 382mV   | 523mV      | -27%       |
+| Switching Noise    |         |            |            |
+| Vpp (Falling)      |         |            |            |
+|--------------------|---------|------------|------------|
+| Quiet Low          | 281mV   | 382mV      | -26%       |
+| Switching Noise    |         |            |            |
+| Vpp (Rising)       |         |            |            |
+|--------------------|---------|------------|------------|
+| Quiet High         | 361mV   | 582mV      | -38%       |
+| Switching Noise    |         |            |            |
+| Vpp (Rising)       |         |            |            |
+|--------------------|---------|------------|------------|
+| Near field Vpp     | 26mV    | 111mV      | -77%       |
++--------------------------------------------------------+
+```
