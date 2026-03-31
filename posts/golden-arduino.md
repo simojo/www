@@ -147,3 +147,17 @@ measured.
 | Near field Vpp     | 26mV    | 111mV      | -77%       |
 +--------------------------------------------------------+
 ```
+
+# Lessons Learned
+
+If I were to change anything, I would have added a 5V LDO regulator on the
+barrel jack. As it stands, it only takes exactly 5V from the barrel jack, which
+limits my options. Another change I would make would be reducing the lengths of
+some of the signal paths; I routed them rather hastily.
+
+# Conclusion
+
+Now I have a functioning Arduino with slightly better signal integrity. I'm not
+sure if I'll use it in any current projects, but it was an enjoyable experience
+walking through the steps of designing a breakout board. Soon, I hope to apply
+these design skills to a robotic system.
