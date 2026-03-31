@@ -1,4 +1,4 @@
-# Recreating an Arduino UNO
+# Making a better Arduino
 ## Let's make an Arduino UNO with better signal integrity.
 ### 2026-03-31
 
