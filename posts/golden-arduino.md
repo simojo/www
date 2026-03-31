@@ -1,4 +1,4 @@
-# WIP: Recreating an Arduino UNO
+# Recreating an Arduino UNO
 ## Let's make an Arduino UNO with better signal integrity.
 ### 2026-03-31
 
@@ -56,6 +56,50 @@ In short, having a continuous ground plane helps with signal integrity, which is
 exactly why state of the art boards may have a ground plane stuffed in between
 each signal layer in 30-layer designs.
 
-# My Schematic
+# Schematic
 
-To start, I made a schematic of my board in Altium.
+To start, I made a schematic of my board in Altium. I added decoupling
+capacitors everywhere I could think to help provide instantaneous current to all
+the hungry components. I had never assembled a crystal oscillator for a clock
+before, and I felt like it was fairly informative. Basically, in the schematic,
+where you can see "328 Crystal" and "CH340 USB to UART", if you look for the
+crystal oscillator (the components with only four pins), you can see that the
+crystal acts as a kind of band pass filter to keep an internal oscillator on the
+ATmega and CH340 oscillating at 16MHz and 12MHz respectively.
+
+One other interesting component is the transient voltage suppression diode
+array, seen under "USB" in the schematic. It has an array of clipper circuits to
+keep any voltage connected to one of its IO pins within the range specified
+across the Zener diode at pins 2 and 5. I was surprised that this component is
+capable of suppressing tens of volts of transient voltage. We put it on the USB
+mini connector's data pins to protect whichever (much more expensive) device we
+may plug into.
+
+Lastly, I set up a reset pin with a 10k pullup resistor. This biases the reset
+pin to be idle high, because the reset pin is active low. The 10k resistor and
+the 1uF capacitor create an RC circuit with a time constant of $\tau = 10\times
+10^{3} \cdot 1 \times 10^{-6} = 10\text{ms}$. This is used to debounce the reset
+button. Another interesting part about the reset circuit is that we connect it
+to the DTR pin of the CH340 through a series capacitor, which acts as a high
+pass filter. The DTR pin is used when we program the ATmega.
+
+<img src="https://raw.githubusercontent.com/simojo/www/tree/dev-svelte/imgs/golden-arduino--schematic.png" title="Altium schematic of golden Arduino." style="width: 100%;" />
+
+# Layout
+
+After painstakingly routing this board amid a conference deadline, I was able to
+get it down to only five crossunders, four of which are under virtually constant
+lines like 5V and 3V. I couldn't avoid crossing my UART TX line under the
+ATmega's UART RX line. I had fun placing a silly gold bar silkscreen icon
+showing off how this board is the "Golden Arduino" in terms of its signal
+integrity!
+
+<img src="https://raw.githubusercontent.com/simojo/www/tree/dev-svelte/imgs/golden-arduino--layout.png" title="Layout of golden Arduino." style="width: 100%;" />
+
+# Finished Product
+
+Surprisingly, I was able to burn the bootloader without any issue after
+assembly. Of course, I checked for shorts between pins before powering on, but
+there was no debug in the bring up process. It was eerie!
+
+<img src="https://raw.githubusercontent.com/simojo/www/tree/dev-svelte/imgs/golden-arduino--assembled.jpg" title="Fully assembled golden Arduino." style="width: 100%;" />
