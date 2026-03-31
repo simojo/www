@@ -83,7 +83,7 @@ button. Another interesting part about the reset circuit is that we connect it
 to the DTR pin of the CH340 through a series capacitor, which acts as a high
 pass filter. The DTR pin is used when we program the ATmega.
 
-<img src="https://raw.githubusercontent.com/simojo/www/tree/dev-svelte/imgs/golden-arduino--schematic.png" title="Altium schematic of golden Arduino." style="width: 100%;" />
+<img src="https://raw.githubusercontent.com/simojo/www/dev-svelte/imgs/golden-arduino--schematic.png" title="Altium schematic of golden Arduino." style="width: 100%;" />
 
 # Layout
 
@@ -94,7 +94,7 @@ ATmega's UART RX line. I had fun placing a silly gold bar silkscreen icon
 showing off how this board is the "Golden Arduino" in terms of its signal
 integrity!
 
-<img src="https://raw.githubusercontent.com/simojo/www/tree/dev-svelte/imgs/golden-arduino--layout.png" title="Layout of golden Arduino." style="width: 100%;" />
+<img src="https://raw.githubusercontent.com/simojo/www/dev-svelte/imgs/golden-arduino--layout.png" title="Layout of golden Arduino." style="width: 100%;" />
 
 # Finished Product
 
@@ -102,4 +102,26 @@ Surprisingly, I was able to burn the bootloader without any issue after
 assembly. Of course, I checked for shorts between pins before powering on, but
 there was no debug in the bring up process. It was eerie!
 
-<img src="https://raw.githubusercontent.com/simojo/www/tree/dev-svelte/imgs/golden-arduino--assembled.jpg" title="Fully assembled golden Arduino." style="width: 100%;" />
+<img src="https://raw.githubusercontent.com/simojo/www/dev-svelte/imgs/golden-arduino--assembled.jpg" title="Fully assembled golden Arduino." style="width: 100%;" />
+
+Using a noise shield that sinks current when outputs of the board switch, I
+found that most switching noise was reduced, including the near field emissions,
+which I measured by shorting the ends of an oscilloscope probe and measuring the
+voltage drop across it! I noticed that when using the slammer circuit on the
+shield, which uses a MOSFET to rapidly switch high current, my Golden Arduino
+unfortunately suffered an 11% increase in peak to peak noise on its power rail
+and on pins outputting a digital high signal. I am curious if this was because
+of my board's few crossunders that pass under the power 5V power rail. Below is
+a table showcasing my overall improved metrics. I'm especially proud that I
+reduced the near field emissions by 77% compared to the commercial Arduino I
+measured.
+
+| `Metric` | `Golden Arduino` | `Commercial Arduino` | `Comparison` |
+| :---: | :---: | :---: | :---: |
+| **`Slammer circuit 5V switching noise`** | **`623mV`** | **`563mV`** | **`11% increase`** |
+| **`Slammer circuit quiet high switching noise`** | **`603mV`** | **`543mV`** | **`11% increase`** |
+| **`Quiet Low Switching Noise Vpp (Falling)`** | **`563mV`** | **`1327mV`** | **`58% reduction`** |
+| **`Quiet High Switching Noise Vpp (Falling)`** | **`382mV`** | **`523mV`** | **`27% reduction`** |
+| **`Quiet Low Switching Noise Vpp (Rising)`** | **`281mV`** | **`382mV`** | **`26% reduction`** |
+| **`Quiet High Switching Noise Vpp (Rising)`** | **`361mV`** | **`582mV`** | **`38% reduction`** |
+| **`Near field Vpp`** | **`26mV`** | **`111mV`** | **`77% reduction`** |
